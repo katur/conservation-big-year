@@ -1787,3 +1787,100 @@ form.float {
 span.float {
 	float: left;
 }
+
+/*
+from old site... delete if style species properly
+body {
+	font: normal normal 15px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+	color: #666;
+	background: #fb5e53 url(http://www.blogblog.com/1kt/ethereal/birds-2toned-bg.png) repeat-x scroll top center;
+}
+
+div#content {
+	background: #FFF url(http://www.blogblog.com/1kt/ethereal/bird-2toned-blue-fade.png) repeat-x scroll top left;
+	width: 960px;
+	min-height: 500px;
+	margin: 0 auto;
+	margin-top: 30px;
+	padding: 20px;
+	overflow: auto;
+}
+
+div.section {
+	float: left;
+	clear: both;
+}
+
+div.subsection {
+	float: left;
+	padding: 20px;
+}
+
+div.subsection_general {
+	float: left;
+	padding: 20px;
+	width: 340px;
+}
+
+div.subsection_paragraph {
+	float: left;
+	padding: 20px;
+	width: 600px;
+}
+
+div.subsubsection {
+	float: left;
+	padding: 20px 0px;
+}
+
+div.filter {
+	float: left;
+	clear: both;
+	padding: 10px 20px;
+}
+
+form.float {
+	float: left;
+}
+
+span.float {
+	float: left;
+}
+
+h1 {
+	width: 100%;
+	font: normal normal 36px Times, Times New Roman, serif;
+	color: #ff8b8b;
+	text-align: center;
+}
+
+h2 {
+	font: normal normal 22px Times, Times New Roman, serif;
+	color: #ff8b8b;
+}
+
+h3 {
+	font: normal bold 18px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+	color: #666666;
+}
+
+span.h3like {
+	font: normal bold 18px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+	color: #666666;
+}
+
+a:link {
+	text-decoration: none;
+	color: #2198a6;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #2198a6;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #4d469c;
+}
+*/

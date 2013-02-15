@@ -16,4 +16,11 @@
 			}
 		}
     }
+    
+    function flickr_edit($name, $value, $name2, $value2) {
+		echo "
+			flickr href: <input name='$name' type='text' size='150' value='$value'>
+			<br>flickr src: <input name='$name2' type='text' size='150' value='$value2'>
+		";
+	}
 ?>
