@@ -1,136 +1,152 @@
 <?php
-include("katherine_functions.php");
-include("katherine_connect.php");
-/*
-Template Name: Species
-Copyright (c) 2013 Katherine Erickson
-*/
+	include("katherine_connect.php");
+	/*
+	Template Name: Species
+	Copyright (c) 2013 Katherine Erickson
+	*/
+	get_header(); 
 
-get_header(); 
+	// get the common name from the url. 
+	// (php-format url available via htaccess file)
+	$url_common_name = mysql_real_escape_string($_GET['common_name']);
 
-// get the common name from the url. 
-// (php-format url available via htaccess file)
-$url_common_name = mysql_real_escape_string($_GET['common_name']);
+	// define MySQL query for info on current species
+	$query = "SELECT common_name, scientific_name, species_list.order, family, subfamily,  is_lifer, is_probably_extinct, in_conservation_list, population_estimate, abc_status, esa_status, cornell_map, ebird_map, conservation_concerns, cool_information, primary_photo_large, primary_photo_small FROM species_list WHERE url_common_name = '$url_common_name';";
 
-// define MySQL query for info on current species
-$query = "SELECT aou_list.common_name, aou_list.scientific_name, 
-	aou_list.order, aou_list.family, aou_list.subfamily, 
-	big_year_list.lifer, 
-	abc_status.status as abc_status, esa_status.status as esa_status,
-	big_year_list.probably_extinct, 
-	big_year_list.cornell_map, big_year_list.ebird_map,
-	big_year_list.conservation_concerns, big_year_list.cool_information		
-	FROM aou_list 
-	LEFT JOIN big_year_list 
-		ON aou_list.id = big_year_list.species_id
-	LEFT JOIN abc_status
-		ON abc_status.id = big_year_list.abc_status
-	LEFT JOIN esa_status
-		ON esa_status.id = big_year_list.esa_status
-	WHERE aou_list.url_common_name = '$url_common_name'
-	LIMIT 1
-";
+	// run query
+	$result = mysql_query($query) or die(mysql_error());
+	if (mysql_num_rows($result) != 1) {
+		echo "The bird in the URL is not on the list, 
+			is spelled differently,
+			or had more than one match.";
 
-// run query
-$result = mysql_query($query) or die(mysql_error());
-if (mysql_num_rows($result) == 0) {
-	echo "That is not a bird.";
-
-} else {
-	// define variables
-	while ($row = mysql_fetch_assoc($result)) {
-		$common_name = $row["common_name"];
-		$scientific_name = $row["scientific_name"];
-		$order = $row["order"];
-		$family = $row["family"];
-		$subfamily = $row["subfamily"];
-		$lifer = $row["lifer"];
-		$abc_status = $row["abc_status"];
-		$esa_status = $row["esa_status"];
-		$probably_extinct = $row["probably_extinct"];
-		$cornell_map = $row["cornell_map"];
-		$ebird_map = $row["ebird_map"];
-		$conservation_concerns = $row["conservation_concerns"];
-		$cool_information = $row["cool_information"];
+	} else {
+		// define variables
+		while ($row = mysql_fetch_assoc($result)) {
+			$common_name = $row["common_name"];
+			$scientific_name = $row["scientific_name"];
+			$order = $row["order"];
+			$family = $row["family"];
+			$subfamily = $row["subfamily"];
+			$is_lifer = $row["is_lifer"];
+			$is_probably_extinct = $row["is_probably_extinct"];
+			$in_conservation_list = $row["in_conservation_list"];
+			$population_estimate = $row["population_estimate"];
+			$abc_status = $row["abc_status"];
+			$esa_status = $row["esa_status"];
+			$cornell_map = $row["cornell_map"];
+			$ebird_map = $row["ebird_map"];
+			$conservation_concerns = $row["conservation_concerns"];
+			$cool_information = $row["cool_information"];
+			$primary_photo_large = $row["primary_photo_large"];
+			$primary_photo_small = $row["primary_photo_small"];
+		}
 	}
-}
+
+	$abc_query = "SELECT status FROM abc_status WHERE id = $abc_status;";
+	$abc_result = mysql_query($abc_query) or die(mysql_error());
+	if (mysql_num_rows($abc_result) == 0) {
+		echo "This bird's abc status not found in abc_status table.";
+	} else {
+		while ($abc_row = mysql_fetch_assoc($abc_result)) {
+			$abc_long = $abc_row["status"];
+		}
+	}
+	
+	$esa_query = "SELECT status FROM esa_status WHERE id = $esa_status;";
+	$esa_result = mysql_query($esa_query) or die(mysql_error());
+	if (mysql_num_rows($esa_result) == 0) {
+		echo "This bird's esa status not found in esa_status table.";
+	} else {
+		while ($esa_row = mysql_fetch_assoc($esa_result)) {
+			$esa_long = $esa_row["status"];
+		}
+	}
 ?>
 	
-
-
-<h2 id="bird"><?php echo $common_name; ?></h2>
-
-<!-- gallery -->
-
+<h1 id="species-title"><?php echo $common_name; ?></h1>
 
 <!-- general -->
-<div class="subsection">
-    
-    <!-- scientific classification -->
-	<div class="subsubsection">
+<div class="species-section">
+	<!-- image -->
+	<a href="<?php echo $primary_photo_large; ?>" target="_blank">
+		<img id="primary-image" src="<?php echo $primary_photo_small; ?>" alt="No photograph yet."	/>
+	</a>
+
+	<!-- scientific classification -->
+	<div id="scientific-classification">
 		<?php
-			if ($probably_extinct)
-				echo "<b>Probably Extinct</b><br><br>";
+			if ($probably_extinct) echo "<span>Probably Extinct</span>";
 		?>
-		<h4>Order:</h4> <?php echo $order; ?><br>
-		<h4>Family:</h4> <?php echo $family; ?><br>
-		<?php if ($subfamily) echo "<h4>Subfamily:</h4> $subfamily<br>"; ?>
-		<h4>Scientific Name:</h4> <i><?php echo $scientific_name; ?></i><br>
-	</div>
-	
-    <!-- endangered statuses -->
-	<div class="subsubsection">
-			<h4><a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">ABC WatchList</a>:</h4>
-			<?php echo $abc_status; ?>
-			<br>
-			<h4><a href="http://www.fws.gov/endangered/species/index.html" target="_blank">ESA Status</a>:</h4>
-			<?php echo $esa_status; ?>
-	</div>
-	
-	<!-- lifer? -->
-	<div class="subsubsection">
-		<h4>Lifer for Laura?</h4>
-		<?php echo ($lifer) ? "Yes" : "No"; ?>
+		<span>Order: <?php echo $order; ?></span>
+		<span>Family: <?php echo $family; ?></span>
+		<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
+		<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
+		<?php
+			if ($is_lifer) echo "
+				<span>Lifer for Laura</span>
+			";
+		?>
 	</div>
 </div>
-
-
-<!-- maps -->
-<div class="subsection">		
+	
+<!-- conservation information -->
+<div id="conservation-classification" class="species-section">
+	<h2 class="species-subtitle">Conservation Classification</h2>
+	<span>
+		<?php
+			if ($in_conservation_list) 
+				echo "In Laura's Conservation List";
+			else
+				echo "Not in Laura's Conservation List";
+		?>
+	</span>
+	
+	<span>
+		<a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">
+			ABC WatchList
+		</a>:
+		<?php echo $abc_long; ?>
+	</span>
+	
+	<span>
+		<a href="http://www.fws.gov/endangered/species/index.html" target="_blank">
+			ESA Status
+		</a>:
+		<?php echo $esa_long; ?>
+	</span>
 	<?php
-		if ($cornell_map || $ebird_map) {
-			echo "<div class='subsubsection'>";
-			if ($cornell_map)
-				echo "<h4><a href='$cornell_map' target='_blank'>Cornell's Range Map</a></h4>";
+		if ($population_estimate) echo "<span>Population Estimate: $population_estimate</span>";
+	?>
+</div>
+	
 
-			if ($ebird_map) 
-				echo "<h4><a href='$ebird_map' target='_blank'>eBird Dynamic Map</a></h4>";
+<!-- links -->
+<div id='species-links' class='species-section'>
+	<h2 class='species-subtitle'>Links</h2>
+	<?php
+		if ($cornell_map)
+			echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";
 
-			echo "</div>";
-		}
+		if ($ebird_map) 
+			echo "<a href='$ebird_map' target='_blank'>eBird Dynamic Map</a>";
 	?>
 </div>
 
-
-<!-- sightings -->
-
-
 <!-- writing -->
-<div class="subsection">
-	<?php 
-		if ($conservation_concerns)
-		    echo "<div class='subsubsection'>
-				<h4>Conservation Concerns</h4>
-				$conservation_concerns
-    		</div>";
+<?php 
+	if ($conservation_concerns)
+	  echo "<div class='species-section'>
+			<h2 class='species-subtitle'>Conservation Concerns</h2>
+			$conservation_concerns
+			</div>
+		";
     		
-    	if ($cool_information)
-    	    echo "<div class='subsubsection'>
-				<h4>Cool Information</h4>
-				$cool_information
-    		</div>";
-    ?>
+  if ($cool_information)
+		echo "<div class='species-section'>
+			<h2 class='species-subtitle'>Cool Information</h2>
+			$cool_information
+			</div>
+		";
+?>
 </div>
-
-
-<?php get_footer(); ?>
