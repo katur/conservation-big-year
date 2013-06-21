@@ -1,21 +1,22 @@
-<?php
+<?php get_header(); 
 	include("katherine_connect.php");
 	/*
 	Template Name: Species
 	Copyright (c) 2013 Katherine Erickson
 	*/
-	get_header(); 
 
 	// get the common name from the url. 
 	// (php-format url available via htaccess file)
 	$url_common_name = mysql_real_escape_string($_GET['common_name']);
 
 	// define MySQL query for info on current species
-	$query = "SELECT common_name, scientific_name, 
+	$query = "SELECT id, common_name, scientific_name, 
 		species_list.order, family, subfamily, 
-		seen_this_year, is_lifer, is_probably_extinct, in_conservation_list, 
-		population_estimate, flickr_code,
-		abc_status, esa_status, cornell_map, ebird_map, 
+		seen_this_year, is_lifer, 
+		is_probably_extinct, in_conservation_list, 
+		flickr_code,
+		abc_status_id, esa_status_id, 
+		cornell_map, ebird_map, 
 		conservation_concerns, cool_information 
 		FROM species_list 
 		WHERE url_common_name = '$url_common_name'
@@ -31,6 +32,7 @@
 	} else {
 		// define variables
 		while ($row = mysql_fetch_assoc($result)) {
+			$species_id = $row["id"];
 			$common_name = $row["common_name"];
 			$scientific_name = $row["scientific_name"];
 			$order = $row["order"];
@@ -40,10 +42,9 @@
 			$is_lifer = $row["is_lifer"];
 			$is_probably_extinct = $row["is_probably_extinct"];
 			$in_conservation_list = $row["in_conservation_list"];
-			$population_estimate = $row["population_estimate"];
 			$flickr_code = $row["flickr_code"];
-			$abc_status = $row["abc_status"];
-			$esa_status = $row["esa_status"];
+			$abc_status_id = $row["abc_status_id"];
+			$esa_status_id = $row["esa_status_id"];
 			$cornell_map = $row["cornell_map"];
 			$ebird_map = $row["ebird_map"];
 			$conservation_concerns = $row["conservation_concerns"];
@@ -51,7 +52,7 @@
 		}
 	}
 
-	$abc_query = "SELECT status FROM abc_status WHERE id = $abc_status;";
+	$abc_query = "SELECT status FROM abc_status WHERE id = $abc_status_id;";
 	$abc_result = mysql_query($abc_query) or die(mysql_error());
 	if (mysql_num_rows($abc_result) == 0) {
 		echo "This bird's abc status not found in abc_status table.";
@@ -61,7 +62,7 @@
 		}
 	}
 	
-	$esa_query = "SELECT status FROM esa_status WHERE id = $esa_status;";
+	$esa_query = "SELECT status FROM esa_status WHERE id = $esa_status_id;";
 	$esa_result = mysql_query($esa_query) or die(mysql_error());
 	if (mysql_num_rows($esa_result) == 0) {
 		echo "This bird's esa status not found in esa_status table.";
@@ -70,6 +71,7 @@
 			$esa_long = $esa_row["status"];
 		}
 	}
+
 ?>
 	
 <h1 id="species-title"><?php echo $common_name; ?></h1>
@@ -97,6 +99,16 @@
 			if ($seen_this_year) echo "
 				<span>SEEN THIS YEAR!</span>
 			";
+			$sightings_query = "SELECT date, state 
+				FROM sightings 
+				WHERE species_id = $species_id;
+			";
+			$sightings_result = mysql_query($sightings_query) or die(mysql_error());
+			while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
+				$date = $sightings_row["date"];
+				$state = $sightings_row["state"];
+				echo "<span>seen on $date in $state</span>";
+			}
 		?>
 	</div>
 </div>
@@ -114,27 +126,20 @@
 	</span>
 	
 	<span>
-		<a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">
-			ABC WatchList
-		</a>:
+		<a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">ABC WatchList</a>:
 		<?php echo $abc_long; ?>
 	</span>
 	
 	<span>
-		<a href="http://www.fws.gov/endangered/species/index.html" target="_blank">
-			ESA Status
-		</a>:
+		<a href="http://www.fws.gov/endangered/species/index.html" target="_blank">ESA Status</a>:
 		<?php echo $esa_long; ?>
 	</span>
-	<?php
-		if ($population_estimate) echo "<span>Population Estimate: $population_estimate</span>";
-	?>
 </div>
 	
 
 <!-- links -->
 <div id='species-links' class='species-section'>
-	<h2 class='species-subtitle'>Links</h2>
+	<!--<h2 class='species-subtitle'>Links</h2>-->
 	<?php
 		if ($cornell_map)
 			echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";

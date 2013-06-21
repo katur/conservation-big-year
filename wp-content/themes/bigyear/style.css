@@ -1783,7 +1783,19 @@ span.float {
 	padding-bottom: 40px;
 }
 
-.species-list a {
+.species-list span {
+	float: left;
+	clear: both;
+	padding-bottom: 5px;
+}
+
+.photo-checklist span {
+	float: left;
+	clear: both;
+	padding-bottom: 50px;
+}
+
+.photo-checklist img {
 	float: left;
 	clear: both;
 	padding-bottom: 5px;
