@@ -16,7 +16,7 @@
 <div class="species-section">
 	<h2 class="species-subtitle">Filters</h2>
 	<div class="filter-subsection">
-		<a class="filter-name" href="./">Clear Filter</a>
+		<a class="filter-name" href="./">All "possible to see" birds</a>
 	</div>
 		
 	<div class="filter-subsection">

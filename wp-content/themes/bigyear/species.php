@@ -11,7 +11,15 @@
 	$url_common_name = mysql_real_escape_string($_GET['common_name']);
 
 	// define MySQL query for info on current species
-	$query = "SELECT common_name, scientific_name, species_list.order, family, subfamily,  is_lifer, is_probably_extinct, in_conservation_list, population_estimate, abc_status, esa_status, cornell_map, ebird_map, conservation_concerns, cool_information, primary_photo_large, primary_photo_small FROM species_list WHERE url_common_name = '$url_common_name';";
+	$query = "SELECT common_name, scientific_name, 
+		species_list.order, family, subfamily, 
+		seen_this_year, is_lifer, is_probably_extinct, in_conservation_list, 
+		population_estimate, flickr_code,
+		abc_status, esa_status, cornell_map, ebird_map, 
+		conservation_concerns, cool_information 
+		FROM species_list 
+		WHERE url_common_name = '$url_common_name'
+	;";
 
 	// run query
 	$result = mysql_query($query) or die(mysql_error());
@@ -28,18 +36,18 @@
 			$order = $row["order"];
 			$family = $row["family"];
 			$subfamily = $row["subfamily"];
+			$seen_this_year = $row["seen_this_year"];
 			$is_lifer = $row["is_lifer"];
 			$is_probably_extinct = $row["is_probably_extinct"];
 			$in_conservation_list = $row["in_conservation_list"];
 			$population_estimate = $row["population_estimate"];
+			$flickr_code = $row["flickr_code"];
 			$abc_status = $row["abc_status"];
 			$esa_status = $row["esa_status"];
 			$cornell_map = $row["cornell_map"];
 			$ebird_map = $row["ebird_map"];
 			$conservation_concerns = $row["conservation_concerns"];
 			$cool_information = $row["cool_information"];
-			$primary_photo_large = $row["primary_photo_large"];
-			$primary_photo_small = $row["primary_photo_small"];
 		}
 	}
 
@@ -68,11 +76,11 @@
 
 <!-- general -->
 <div class="species-section">
-	<!-- image -->
-	<a href="<?php echo $primary_photo_large; ?>" target="_blank">
-		<img id="primary-image" src="<?php echo $primary_photo_small; ?>" alt="No photograph yet."	/>
-	</a>
-
+	<!-- image -->	
+	<div id="primary-image">
+		<?php echo $flickr_code ?>
+	</div>
+	
 	<!-- scientific classification -->
 	<div id="scientific-classification">
 		<?php
@@ -85,6 +93,9 @@
 		<?php
 			if ($is_lifer) echo "
 				<span>Lifer for Laura</span>
+			";
+			if ($seen_this_year) echo "
+				<span>SEEN THIS YEAR!</span>
 			";
 		?>
 	</div>
