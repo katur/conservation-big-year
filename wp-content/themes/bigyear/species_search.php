@@ -1,10 +1,9 @@
-<?php
+<?php get_header(); 
 	include("katherine_connect.php");
 	/*
 	Template Name: Species Search
 	Copyright (c) 2013 Katherine Erickson
 	*/
-	get_header(); 
 ?>
 
 <h1 id="species-title">Species Search</h1>
@@ -95,13 +94,13 @@
 				echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name</a>";
 
 				if ($seen_this_year)
-					echo "&#x2713; ";
+					echo " &#x2713;";
 				if ($date)
-					echo "$date ";
+					echo " $date";
 				if ($state)
-					echo "$state ";
-				if ($seen_this_year && $is_lifer)
-					echo "<b>LIFER!</b> ";
+					echo " in $state";
+				if ($is_lifer)
+					echo " <b>LIFER!</b> ";
 				echo "</span>";
 				
 				// if logged in, show links to edit

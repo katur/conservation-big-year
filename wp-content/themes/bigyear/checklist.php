@@ -1,10 +1,9 @@
-<?php
+<?php get_header(); 
 	include("katherine_connect.php");
 	/*
 	Template Name: Checklist
 	Copyright (c) 2013 Katherine Erickson
 	*/
-	get_header(); 
 ?>
 
 <h1 id="species-title">Photo Checklist</h1>
