@@ -1,14 +1,11 @@
 <?php get_header(); 
 	include("katherine_connect.php");
+	
 	/*
 	Template Name: Checklist
 	Copyright (c) 2013 Katherine Erickson
 	*/
-?>
 
-<h1 id="species-title">Photo Checklist</h1>
-
-<?php
 	$query = "
 		SELECT common_name, seen_this_year,
 		is_lifer, url_common_name,
@@ -22,12 +19,15 @@
 	";
 
 	$result = mysql_query($query) or die(mysql_error());
+	$total_seen = mysql_numrows($result);
 ?>
 
+<h1 id="species-title">Photo Checklist</h1>
+
 <div class="species-section">
+	<h2 class="species-subtitle"><?php echo $total_seen; ?> species seen so far!!</h2>
 	<div class="photo-checklist">
 		<?php
-			$counter = 0;
 			while ($row = mysql_fetch_assoc($result)) {
 				$common_name = $row["common_name"];
 				$seen_this_year = $row["seen_this_year"];
@@ -44,7 +44,6 @@
 				
 				echo "<a href='/species/?common_name=$url_common_name'>$common_name</a>";
 					
-				$counter += 1;
 				echo "&#x2713;";
 
 				if ($date)
@@ -60,7 +59,6 @@
 					echo "<a href = '/edit/$url_common_name'>Edit</a>";
 				}
 			}
-			echo "<span>$counter total species seen!</span>";
 		?>
 	</div>
 </div>

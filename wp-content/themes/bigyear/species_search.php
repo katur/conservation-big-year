@@ -51,6 +51,7 @@
 	$query = "
 		SELECT common_name, seen_this_year,
 		is_lifer, url_common_name,
+		is_probably_extinct,
 		date, state,
 		flickr_code	
 		FROM species_list
@@ -90,6 +91,7 @@
 				$date = $row["date"];
 				$state = $row["state"];
 				$flickr_code = $row["flickr_code"];
+				$is_probably_extinct = $row["is_probably_extinct"];
 				
 				echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name</a>";
 
@@ -101,6 +103,8 @@
 					echo " in $state";
 				if ($is_lifer)
 					echo " <b>LIFER!</b> ";
+				if ($is_probably_extinct)
+					echo " (Note: is probably extinct)";
 				echo "</span>";
 				
 				// if logged in, show links to edit
