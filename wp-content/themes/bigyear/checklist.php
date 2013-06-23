@@ -19,7 +19,7 @@
 		SELECT common_name, seen_this_year,
 		is_lifer, url_common_name,
 		date, state,
-		flickr_code
+		flickr_img_small
 		FROM species_list
 		LEFT JOIN sightings
 		ON species_list.id = sightings.species_id
@@ -53,13 +53,13 @@
 				$url_common_name = $row["url_common_name"];
 				$date = $row["date"];
 				$state = $row["state"];
-				$flickr_code = $row["flickr_code"];	
+				$flickr_img_small = $row["flickr_img_small"];	
 
 				echo "<div class='photo-and-caption'>";
-					if ($flickr_code)
-						echo "$flickr_code";
+					if ($flickr_img_small)
+						echo "$flickr_img_small";
 					else
-						echo "<img src='http://placekitten.com/500/333' width='500px' />";
+						echo "<img src='http://placekitten.com/500/333' width='340px' />";
 
 					echo "
 						<div class='photo-caption'>

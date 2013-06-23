@@ -1831,7 +1831,7 @@ span.float {
 	position: relative;
 	right: 40px;
 	margin: 40px 0;
-	padding: 0 5px;
+	padding: 0 20px;
 }
 
 #photo-checklist h2 {
@@ -1853,8 +1853,8 @@ span.float {
 .photo-and-caption {
 	float: left;
 	position: relative;
-	width: 340px;
-	margin-bottom: 5px;
+	width: 320px;
+	margin-bottom: 20px;
 }
 
 .photo-and-caption img {

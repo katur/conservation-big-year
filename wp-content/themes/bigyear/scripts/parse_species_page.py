@@ -35,13 +35,35 @@ def process_file(data):
 				sys.exit("Error: " + species_name + " not found")
 			species_id = c.fetchone()
 			c.close()
-
+			
 			if dictionary.has_key("src"):
 				code = '<img'
 				if dictionary.has_key("alt"):
 					code += ' alt="' + dictionary["alt"] + '"'
 				if dictionary.has_key("orientation"):	
 					if "HORIZONTAL" in dictionary["orientation"]:
+						url_small = dictionary["src"].rstrip(".jpg") + "_m" + ".jpg"
+						code += ' src="' + url_small + '"'
+					elif "VERTICAL" in dictionary["orientation"]:
+						url_small = dictionary["src"].rstrip(".jpg") + "_n" + ".jpg"
+						code += ' src="' + url_small + '"'
+				else:
+					code += ' src="' + dictionary["src"] + '"'
+				
+				code += ' />'
+				
+				print species_name + code
+
+				c = db.cursor()
+				c.execute("""update species_list set flickr_img_very_small=%s where id=%s;commit;""", (code, species_id[0]))
+				c.close()
+'''
+			if dictionary.has_key("src"):
+				code = '<img'
+				if dictionary.has_key("alt"):
+					code += ' alt="' + dictionary["alt"] + '"'
+				if dictionary.has_key("orientation"):	
+					if "horizontal" in dictionary["orientation"]:
 						url_small = dictionary["src"].rstrip(".jpg") + "_n" + ".jpg"
 						code += ' src="' + url_small + '"'
 					else:
@@ -54,8 +76,9 @@ def process_file(data):
 				print species_name + code
 
 				c = db.cursor()
-				c.execute("""UPDATE species_list SET flickr_img_small=%s WHERE id=%s;COMMIT;""", (code, species_id[0]))
+				c.execute("""update species_list set flickr_img_small=%s where id=%s;commit;""", (code, species_id[0]))
 				c.close()
+'''
 
 '''
 			if dictionary.has_key("src"):
