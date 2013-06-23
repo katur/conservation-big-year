@@ -23,9 +23,12 @@
 ?>
 <div class="site-content full-width">
 	<h1 id="species-title">Photo Checklist</h1>
-	<h2 class="species-subtitle"><?php echo $total_seen; ?> species seen so far!!</h2>
-	<div class="photo-checklist">
-		<h2>DUCKS</h2>
+	<h2 class="species-subtitle">
+		<?php echo $total_seen; ?> species seen so far!!
+	</h2>
+
+	<div id="photo-checklist">
+		<h2>Bjrds</h2>
 		<?php
 			while ($row = mysql_fetch_assoc($result)) {
 				$common_name = $row["common_name"];
@@ -36,30 +39,37 @@
 				$state = $row["state"];
 				$flickr_code = $row["flickr_code"];	
 
-				echo "<div class='photo-and-caption'";
-				if ($flickr_code)
-					echo "$flickr_code";
-				
-				echo "<span>";
-				
-				echo "<a href='/species/?common_name=$url_common_name'>$common_name</a>";
-					
-				echo "&#x2713;";
+				echo "<div class='photo-and-caption'>";
+					if ($flickr_code)
+						echo "$flickr_code";
+					else
+						echo "<img src='http://placekitten.com/500/333' width='500px' />";
 
-				if ($date)
-					echo "$date ";
-				if ($state)
-					echo "$state ";
-				if ($is_lifer)
-					echo "<b>LIFER!</b> ";
-				echo "</span></div>";
-				
-				// if logged in, show links to edit
-				if ($_SESSION["logged_in"]) {
-					echo "<a href = '/edit/$url_common_name'>Edit</a>";
+					echo "<div class='photo-caption'>";
+						
+						echo "
+							<a href='/species/?common_name=$url_common_name'>$common_name</a>
+						";
+							
+						echo "<span>";
+						echo "&#x2713;";
+						if ($date)
+							echo "$date ";
+						if ($state)
+							echo "$state ";
+						if ($is_lifer)
+							echo "<b>LIFER!</b> ";
+						
+						echo "</span>";
+					
+						// if logged in, show links to edit
+						//if ($_SESSION["logged_in"]) {
+						//	echo "<a href = '/edit/$url_common_name'>Edit</a>";
+						//}
+						
+					echo "</div></div>";
 				}
-			}
-		?>
+			?>
 	</div>
 </div>
 <?php get_footer(); ?>

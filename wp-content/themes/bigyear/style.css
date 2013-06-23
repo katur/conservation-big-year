@@ -584,7 +584,6 @@ a:hover {
 .site-header h1 {
 	font-size: 24px;
 	font-size: 1.714285714rem;
-	line-height: 1.285714286;
 	margin-bottom: 14px;
 	margin-bottom: 1rem;
 }
@@ -1480,11 +1479,10 @@ img#wpstats {
 		text-align: left;
 	}
 	.site-header h1 {
-		font-size: 35px;
-		font-size: 2.5rem;
-		line-height: 1.846153846;
+		font-size: 100px;
 		margin-bottom: 0;
-		font-family: marcellus_scregular;
+		font-family: 'adelaidaregular';
+		font-weight: normal;
 		letter-spacing: 2px;
 	}
 	.main-navigation ul.nav-menu,
@@ -1765,6 +1763,10 @@ span.float {
 }
 
 /* STYLES KATHERINE ADDED */
+.full-width {
+	width: 100%;
+}	
+
 #species-title {
 	font-size: 24px;
 	padding-bottom: 20px;
@@ -1788,39 +1790,6 @@ span.float {
 	float: left;
 	clear: both;
 	padding-bottom: 5px;
-}
-
-.full-width {
-	width: 100%;
-}	
-
-.photo-checklist {
-	float: left;
-	background: black;
-	margin-top: 40px;
-	padding-top: 40px;
-}
-
-.photo-checklist h2 {
-	float: left;
-	width: 100%;;
-	font-family: 'adelaidaregular';
-	color: white;
-	font-weight: normal;
-	font-size: 200px;
-}
-
-.photo-and-caption {
-	float: left;
-	position: relative;
-	max-width: 50%;
-}
-
-.photo-checklist span {
-	position: absolute;
-	color: white;
-	bottom: 0;
-	left: 0;
 }
 
 .filter-subsection {
@@ -1853,4 +1822,59 @@ span.float {
 	float: left;
 	clear: both;
 	padding-bottom: 10px;
+}
+
+#photo-checklist {
+	background: black;
+	float: left;
+	width: 1040px;
+	position: relative;
+	right: 40px;
+	margin: 40px 0;
+	padding-left: 1px;
+}
+
+#photo-checklist h2 {
+	float: left;
+	width: 100%;
+	color: white;
+	text-align: center;
+	font-family: adelaidaregular;
+	font-weight: normal;
+	font-size: 200px;
+}
+
+.photo-and-caption {
+	float: left;
+	position: relative;
+	width: 33.33%;
+}
+
+.photo-and-caption img {
+	float: left;
+	width: 340px;
+	margin: 0 5px 5px 0;
+}
+
+.photo-caption {
+	position: absolute;
+	width: 96%;
+	display: block;
+	padding: 2%;
+	background: rgba(0,0,0,.5);
+	color: white;
+	font-size: 12px;
+	font-weight: normal;
+	bottom: 0;
+	left: 0;
+}
+
+.photo-caption a {
+	color: white;
+	float: left;
+}
+
+.photo-caption span {
+	color: white;
+	float: right;
 }
