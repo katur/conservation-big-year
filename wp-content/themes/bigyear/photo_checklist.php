@@ -2,7 +2,7 @@
 	include("katherine_connect.php");
 	
 	/*
-	Template Name: Checklist
+	Template Name: Photo Checklist
 	Copyright (c) 2013 Katherine Erickson
 	*/
 
@@ -16,10 +16,8 @@
 	$family_result = mysql_query($family_query) or die(mysql_error());
 	
 	$species_query = "
-		SELECT common_name, seen_this_year,
-		is_lifer, url_common_name,
-		date, state,
-		flickr_img_small
+		SELECT common_name, date, state,
+		is_lifer, url_common_name, flickr_img_small
 		FROM species_list
 		LEFT JOIN sightings
 		ON species_list.id = sightings.species_id
@@ -42,13 +40,12 @@
 			$family_common = $family_row["family_common"];
 			$family_count = $family_row["family_count"];
 			echo "
-				<h2>$family_common, $family_count</h2>	
+				<h2>$family_common</h2>	
 				<div class='photo-checklist-family'>
 			";
 			for ($i=0; $i<$family_count; $i++) {
 				$row = mysql_fetch_assoc($species_result);
 				$common_name = $row["common_name"];
-				$seen_this_year = $row["seen_this_year"];
 				$is_lifer = $row["is_lifer"];
 				$url_common_name = $row["url_common_name"];
 				$date = $row["date"];

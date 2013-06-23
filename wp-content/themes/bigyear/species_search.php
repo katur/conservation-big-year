@@ -25,7 +25,6 @@
 			<span>ESA status:</span>
 			<a href="./?esa_status_id=1">Endangered</a>
 			<a href="./?esa_status_id=2">Threatened</a>
-			<a href="./?esa_status_id=3">Candidate</a>
 		</div>
 
 		<div class="filter-row extra-space">

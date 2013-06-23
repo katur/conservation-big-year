@@ -11,7 +11,7 @@
 
 	// define MySQL query for info on current species
 	$query = "SELECT id, common_name, scientific_name, 
-		species_list.order, family, subfamily, 
+		species_list.order, family, family_common, subfamily, 
 		seen_this_year, is_lifer, 
 		is_probably_extinct, in_conservation_list, 
 		flickr_code,
@@ -37,6 +37,7 @@
 			$scientific_name = $row["scientific_name"];
 			$order = $row["order"];
 			$family = $row["family"];
+			$family_common = $row["family_common"];
 			$subfamily = $row["subfamily"];
 			$seen_this_year = $row["seen_this_year"];
 			$is_lifer = $row["is_lifer"];
@@ -74,7 +75,12 @@
 
 ?>
 <div class="site-content full-width">	
-	<h1 id="species-title"><?php echo $common_name; ?></h1>
+	<h1 id="species-title">
+		<?php echo $common_name; 
+			if ($seen_this_year)
+				echo " &#x2713;";
+		?>
+	</h1>
 
 	<!-- general -->
 	<div class="species-section">
@@ -89,26 +95,34 @@
 				if ($probably_extinct) echo "<span>Probably Extinct</span>";
 			?>
 			<span>Order: <?php echo $order; ?></span>
-			<span>Family: <?php echo $family; ?></span>
+			<span>Family: <?php echo "$family ($family_common)"; ?> </span>
 			<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
 			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
 			<?php
-				if ($is_lifer) echo "
-					<span>Lifer for Laura</span>
-				";
-				if ($seen_this_year) echo "
-					<span>SEEN THIS YEAR!</span>
-				";
 				$sightings_query = "SELECT date, state 
 					FROM sightings 
 					WHERE species_id = $species_id;
 				";
 				$sightings_result = mysql_query($sightings_query) or die(mysql_error());
-				while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
-					$date = $sightings_row["date"];
-					$state = $sightings_row["state"];
-					echo "<span>seen on $date in $state</span>";
+				if (mysql_numrows($sightings_result) > 0) {
+					if ($is_lifer) {
+						$sightings_row = mysql_fetch_assoc($sightings_result);
+						$date = $sightings_row["date"];
+						$state = $sightings_row["state"];
+						echo "<span>&#x2713; Seen on $date in $state. LIFER!!</span>";
+					}
+					
+					while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
+						$date = $sightings_row["date"];
+						$state = $sightings_row["state"];
+						echo "<span>&#x2713; Seen on $date in $state</span>";
+					}
+				} else {
+					if ($is_lifer) {
+						echo "<span>Would be a lifer for Laura</span>";
+					}
 				}
+
 			?>
 		</div>
 	</div>
