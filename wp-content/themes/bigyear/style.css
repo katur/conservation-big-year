@@ -1827,14 +1827,15 @@ span.float {
 #photo-checklist {
 	background: black;
 	float: left;
-	width: 1035px;
+	width: 1030px;
 	position: relative;
 	right: 40px;
 	margin: 40px 0;
-	padding-left: 5px;
+	padding: 0 5px;
 }
 
 #photo-checklist h2 {
+	clear: both;
 	float: left;
 	width: 100%;
 	color: white;
@@ -1844,16 +1845,21 @@ span.float {
 	font-size: 200px;
 }
 
+.photo-checklist-family {
+	float: left;
+	width: 100%;
+}
+
 .photo-and-caption {
 	float: left;
 	position: relative;
-	width: 33.33%;
+	width: 340px;
+	margin-bottom: 5px;
 }
 
 .photo-and-caption img {
 	float: left;
-	width: 340px;
-	margin: 0 5px 5px 0;
+	width: 100%;
 }
 
 .photo-caption {

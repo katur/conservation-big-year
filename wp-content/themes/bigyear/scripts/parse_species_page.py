@@ -37,6 +37,28 @@ def process_file(data):
 			c.close()
 
 			if dictionary.has_key("src"):
+				code = '<img'
+				if dictionary.has_key("alt"):
+					code += ' alt="' + dictionary["alt"] + '"'
+				if dictionary.has_key("orientation"):	
+					if "HORIZONTAL" in dictionary["orientation"]:
+						url_small = dictionary["src"].rstrip(".jpg") + "_n" + ".jpg"
+						code += ' src="' + url_small + '"'
+					else:
+						code += ' src="' + dictionary["src"] + '"'
+				else:
+					code += ' src="' + dictionary["src"] + '"'
+				
+				code += ' />'
+				
+				print species_name + code
+
+				c = db.cursor()
+				c.execute("""UPDATE species_list SET flickr_img_small=%s WHERE id=%s;COMMIT;""", (code, species_id[0]))
+				c.close()
+
+'''
+			if dictionary.has_key("src"):
 				code = ''
 				
 				if dictionary.has_key("href"):
@@ -61,8 +83,10 @@ def process_file(data):
 					code += '</a>'
 
 				c = db.cursor()
-				#c.execute("""UPDATE species_list SET flickr_code=%s WHERE id=%s;COMMIT;""", (code, species_id[0]))
+				c.execute("""UPDATE species_list SET flickr_code=%s WHERE id=%s;COMMIT;""", (code, species_id[0]))
 				c.close()
+'''
+
 
 '''
 			if dictionary.has_key("seen"):

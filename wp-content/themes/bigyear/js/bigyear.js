@@ -1,7 +1,6 @@
-/*$(function(){
-	$("#photo-checklist").masonry({
+$(function(){
+	$(".photo-checklist-family").masonry({
 		itemSelector: '.photo-and-caption',
-		containerStyle: null,
-		gutter: 10
+		gutter: 5
 	});
-})*/
+})
