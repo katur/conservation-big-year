@@ -1827,11 +1827,11 @@ span.float {
 #photo-checklist {
 	background: black;
 	float: left;
-	width: 1040px;
+	width: 1035px;
 	position: relative;
 	right: 40px;
 	margin: 40px 0;
-	padding-left: 1px;
+	padding-left: 5px;
 }
 
 #photo-checklist h2 {
