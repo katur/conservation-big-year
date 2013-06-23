@@ -15,31 +15,25 @@
 	</div>
 
 	<div class="species-section">
-		<h2 class="species-subtitle">Filters</h2>
-		<div class="filter-subsection">
-			<a class="filter-name" href="./">All "possible to see" birds</a>
-		</div>
-			
-		<div class="filter-subsection">
-			<a href="./?in_conservation_list=1">In conservation list</a>
+		<div class="filter-row-extra-space">
+			<a href="./">All "possible to see" species</a>
+			<a href="./?in_conservation_list=1">In Laura's conservation list</a>
+			<a href="./?is_lifer=1">Lifer for Laura</a>
 		</div>
 		
-		<div class="filter-subsection">
-			<span class="filter-name">ESA status:</span>
+		<div class="filter-row">
+			<span>ESA status:</span>
 			<a href="./?esa_status_id=1">Endangered</a>
 			<a href="./?esa_status_id=2">Threatened</a>
 			<a href="./?esa_status_id=3">Candidate</a>
 		</div>
 
-		<div class="filter-subsection">
-			<span class="filter-name">ABC status:</span>
+		<div class="filter-row extra-space">
+			<span>ABC status:</span>
 			<a href="./?abc_status_id=1">Red (Highest Continental Concern)</a>
 			<a href="./?abc_status_id=2">Yellow (Declining or Rare Continental Species)</a>
 		</div>
 				
-		<div class="filter-subsection">
-			<a href="./?is_lifer=1">Lifer for Laura</a>
-		</div>
 	</div>
 
 	<?php

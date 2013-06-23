@@ -1792,14 +1792,18 @@ span.float {
 	padding-bottom: 5px;
 }
 
-.filter-subsection {
+.filter-row, .filter-row-extra-space {
 	float: left;
 	clear: both;
 	padding-bottom: 20px;
 }
 
-.filter-subsection a, .filter-subsection span {
+.filter-row a, .filter-row span {
 	padding-right: 10px;
+}
+
+.filter-row-extra-space a {
+	padding-right: 40px;
 }
 
 #primary-image {
@@ -1873,14 +1877,13 @@ span.float {
 	font-weight: normal;
 	bottom: 0;
 	left: 0;
+	color: white;
 }
 
-.photo-caption a {
-	color: white;
+.photo-caption span.left {
 	float: left;
 }
 
-.photo-caption span {
-	color: white;
+.photo-caption span.right {
 	float: right;
 }

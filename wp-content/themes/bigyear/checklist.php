@@ -55,7 +55,8 @@
 				$state = $row["state"];
 				$flickr_img_small = $row["flickr_img_small"];	
 
-				echo "<div class='photo-and-caption'>";
+				echo "<a href='/species/?common_name=$url_common_name'>
+					<div class='photo-and-caption'>";
 					if ($flickr_img_small)
 						echo "$flickr_img_small";
 					else
@@ -63,8 +64,8 @@
 
 					echo "
 						<div class='photo-caption'>
-							<a href='/species/?common_name=$url_common_name'>$common_name</a>
-							<span>&#x2713
+							<span class='left'>$common_name</span>
+							<span class='right'>&#x2713
 					";
 						if ($date)
 							echo "$date ";
@@ -80,7 +81,7 @@
 						//	echo "<a href = '/edit/$url_common_name'>Edit</a>";
 						//}
 						
-					echo "</div>"; // photo-caption
+					echo "</div></a>"; // photo-caption
 				echo "</div>"; // photo-and-caption
 			} // species for loop
 			echo "</div>"; // photo-checklist-family
