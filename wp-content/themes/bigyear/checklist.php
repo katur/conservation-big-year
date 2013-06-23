@@ -21,12 +21,11 @@
 	$result = mysql_query($query) or die(mysql_error());
 	$total_seen = mysql_numrows($result);
 ?>
-
-<h1 id="species-title">Photo Checklist</h1>
-
-<div class="species-section">
+<div class="site-content full-width">
+	<h1 id="species-title">Photo Checklist</h1>
 	<h2 class="species-subtitle"><?php echo $total_seen; ?> species seen so far!!</h2>
 	<div class="photo-checklist">
+		<h2>DUCKS</h2>
 		<?php
 			while ($row = mysql_fetch_assoc($result)) {
 				$common_name = $row["common_name"];
@@ -37,6 +36,7 @@
 				$state = $row["state"];
 				$flickr_code = $row["flickr_code"];	
 
+				echo "<div class='photo-and-caption'";
 				if ($flickr_code)
 					echo "$flickr_code";
 				
@@ -52,7 +52,7 @@
 					echo "$state ";
 				if ($is_lifer)
 					echo "<b>LIFER!</b> ";
-				echo "</span>";
+				echo "</span></div>";
 				
 				// if logged in, show links to edit
 				if ($_SESSION["logged_in"]) {
@@ -62,3 +62,4 @@
 		?>
 	</div>
 </div>
+<?php get_footer(); ?>

@@ -73,96 +73,97 @@
 	}
 
 ?>
-	
-<h1 id="species-title"><?php echo $common_name; ?></h1>
+<div class="site-content full-width">	
+	<h1 id="species-title"><?php echo $common_name; ?></h1>
 
-<!-- general -->
-<div class="species-section">
-	<!-- image -->	
-	<div id="primary-image">
-		<?php echo $flickr_code ?>
+	<!-- general -->
+	<div class="species-section">
+		<!-- image -->	
+		<div id="primary-image">
+			<?php echo $flickr_code ?>
+		</div>
+		
+		<!-- scientific classification -->
+		<div id="scientific-classification">
+			<?php
+				if ($probably_extinct) echo "<span>Probably Extinct</span>";
+			?>
+			<span>Order: <?php echo $order; ?></span>
+			<span>Family: <?php echo $family; ?></span>
+			<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
+			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
+			<?php
+				if ($is_lifer) echo "
+					<span>Lifer for Laura</span>
+				";
+				if ($seen_this_year) echo "
+					<span>SEEN THIS YEAR!</span>
+				";
+				$sightings_query = "SELECT date, state 
+					FROM sightings 
+					WHERE species_id = $species_id;
+				";
+				$sightings_result = mysql_query($sightings_query) or die(mysql_error());
+				while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
+					$date = $sightings_row["date"];
+					$state = $sightings_row["state"];
+					echo "<span>seen on $date in $state</span>";
+				}
+			?>
+		</div>
 	</div>
-	
-	<!-- scientific classification -->
-	<div id="scientific-classification">
+		
+	<!-- conservation information -->
+	<div id="conservation-classification" class="species-section">
+		<h2 class="species-subtitle">Conservation Classification</h2>
+		<span>
+			<?php
+				if ($in_conservation_list) 
+					echo "In Laura's Conservation List";
+				else
+					echo "Not in Laura's Conservation List";
+			?>
+		</span>
+		
+		<span>
+			<a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">ABC WatchList</a>:
+			<?php echo $abc_long; ?>
+		</span>
+		
+		<span>
+			<a href="http://www.fws.gov/endangered/species/index.html" target="_blank">ESA Status</a>:
+			<?php echo $esa_long; ?>
+		</span>
+	</div>
+		
+
+	<!-- links -->
+	<div id='species-links' class='species-section'>
+		<!--<h2 class='species-subtitle'>Links</h2>-->
 		<?php
-			if ($probably_extinct) echo "<span>Probably Extinct</span>";
-		?>
-		<span>Order: <?php echo $order; ?></span>
-		<span>Family: <?php echo $family; ?></span>
-		<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
-		<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
-		<?php
-			if ($is_lifer) echo "
-				<span>Lifer for Laura</span>
-			";
-			if ($seen_this_year) echo "
-				<span>SEEN THIS YEAR!</span>
-			";
-			$sightings_query = "SELECT date, state 
-				FROM sightings 
-				WHERE species_id = $species_id;
-			";
-			$sightings_result = mysql_query($sightings_query) or die(mysql_error());
-			while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
-				$date = $sightings_row["date"];
-				$state = $sightings_row["state"];
-				echo "<span>seen on $date in $state</span>";
-			}
+			if ($cornell_map)
+				echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";
+
+			if ($ebird_map) 
+				echo "<a href='$ebird_map' target='_blank'>eBird Dynamic Map</a>";
 		?>
 	</div>
-</div>
-	
-<!-- conservation information -->
-<div id="conservation-classification" class="species-section">
-	<h2 class="species-subtitle">Conservation Classification</h2>
-	<span>
-		<?php
-			if ($in_conservation_list) 
-				echo "In Laura's Conservation List";
-			else
-				echo "Not in Laura's Conservation List";
-		?>
-	</span>
-	
-	<span>
-		<a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">ABC WatchList</a>:
-		<?php echo $abc_long; ?>
-	</span>
-	
-	<span>
-		<a href="http://www.fws.gov/endangered/species/index.html" target="_blank">ESA Status</a>:
-		<?php echo $esa_long; ?>
-	</span>
-</div>
-	
 
-<!-- links -->
-<div id='species-links' class='species-section'>
-	<!--<h2 class='species-subtitle'>Links</h2>-->
-	<?php
-		if ($cornell_map)
-			echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";
-
-		if ($ebird_map) 
-			echo "<a href='$ebird_map' target='_blank'>eBird Dynamic Map</a>";
+	<!-- writing -->
+	<?php 
+		if ($conservation_concerns)
+			echo "<div class='species-section'>
+				<h2 class='species-subtitle'>Conservation Concerns</h2>
+				$conservation_concerns
+				</div>
+			";
+					
+		if ($cool_information)
+			echo "<div class='species-section'>
+				<h2 class='species-subtitle'>Cool Information</h2>
+				$cool_information
+				</div>
+			";
 	?>
-</div>
-
-<!-- writing -->
-<?php 
-	if ($conservation_concerns)
-	  echo "<div class='species-section'>
-			<h2 class='species-subtitle'>Conservation Concerns</h2>
-			$conservation_concerns
-			</div>
-		";
-    		
-  if ($cool_information)
-		echo "<div class='species-section'>
-			<h2 class='species-subtitle'>Cool Information</h2>
-			$cool_information
-			</div>
-		";
-?>
+	</div>
 </div>

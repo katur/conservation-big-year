@@ -53,16 +53,16 @@ http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
 
 /* =Reset
 -------------------------------------------------------------- */
-
 @font-face {
-    font-family: 'MidoMedium';
-    src: url('fonts/Mido/Mido-webfont.eot');
-    src: url('fonts/Mido/Mido-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Mido/Mido-webfont.woff') format('woff'),
-         url('fonts/Mido/Mido-webfont.ttf') format('truetype'),
-         url('fonts/Mido/Mido-webfont.svg#MidoMedium') format('svg');
+    font-family: 'adelaidaregular';
+    src: url('fonts/Adelaida/adelaida-regular-webfont.eot');
+    src: url('fonts/Adelaida/adelaida-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Adelaida/adelaida-regular-webfont.woff') format('woff'),
+         url('fonts/Adelaida/adelaida-regular-webfont.ttf') format('truetype'),
+         url('fonts/Adelaida/adelaida-regular-webfont.svg#adelaidaregular') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 @font-face {
@@ -715,12 +715,12 @@ footer[role="contentinfo"] a:hover {
 	margin-bottom: 24px;
 	margin-bottom: 1.714285714rem;
 }
-.entry-header .entry-title {
+.entry-header .entry-title, #species-title {
 	font-size: 20px;
 	font-size: 1.428571429rem;
 	line-height: 1.2;
 	font-weight: normal;
-	font-family: MediumMido;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
 	letter-spacing: 1px;
 }
 .entry-header .entry-title a {
@@ -1766,13 +1766,14 @@ span.float {
 
 /* STYLES KATHERINE ADDED */
 #species-title {
-	font-size: 26px;
+	font-size: 24px;
 	padding-bottom: 20px;
 	font-weight: normal;
 }
 
 .species-subtitle {
-	font-size: 22px;
+	font-size: 20px;
+	float: left;
 	font-weight: normal;
 	padding-bottom: 20px;
 }
@@ -1789,16 +1790,37 @@ span.float {
 	padding-bottom: 5px;
 }
 
-.photo-checklist span {
+.full-width {
+	width: 100%;
+}	
+
+.photo-checklist {
 	float: left;
-	clear: both;
-	padding-bottom: 50px;
+	background: black;
+	margin-top: 40px;
+	padding-top: 40px;
 }
 
-.photo-checklist img {
+.photo-checklist h2 {
 	float: left;
-	clear: both;
-	padding-bottom: 5px;
+	width: 100%;;
+	font-family: 'adelaidaregular';
+	color: white;
+	font-weight: normal;
+	font-size: 200px;
+}
+
+.photo-and-caption {
+	float: left;
+	position: relative;
+	max-width: 50%;
+}
+
+.photo-checklist span {
+	position: absolute;
+	color: white;
+	bottom: 0;
+	left: 0;
 }
 
 .filter-subsection {
