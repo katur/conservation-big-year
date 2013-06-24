@@ -30,9 +30,7 @@
 ?>
 <div class="site-content full-width">
 	<h1 id="species-title">Photo Checklist</h1>
-	<h2 class="species-subtitle">
-		<?php echo $total_seen; ?> species seen so far!!
-	</h2>
+	<?php echo $total_seen; ?> species seen so far!!
 
 	<div id="photo-checklist">
 	<?php

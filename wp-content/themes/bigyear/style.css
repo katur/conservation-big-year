@@ -496,14 +496,10 @@ html {
 	font-size: 87.5%;
 }
 body {
-	font-size: 18px;
-	font-size: 1.28571428571rem;
-	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	font-size: 15px;
+	font-family: Helvetica, Arial, sans-serif;
 	text-rendering: optimizeLegibility;
-	color: #111;
-}
-body.custom-font-enabled {
-	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	color: #444;
 }
 a {
 	outline: none;
@@ -553,8 +549,7 @@ a:hover {
 
 /* Header */
 .site-header {
-	padding: 24px 0;
-	padding: 1.714285714rem 0;
+	padding: 14px 0;
 }
 .site-header h1,
 .site-header h2 {
@@ -705,10 +700,9 @@ footer[role="contentinfo"] a:hover {
 }
 .entry-header .entry-title, #species-title {
 	font-size: 20px;
-	font-size: 1.428571429rem;
-	line-height: 1.2;
+	font-family: Century Gothic, Arial, sans-serif;
 	font-weight: normal;
-	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	line-height: 1.2;
 	letter-spacing: 1px;
 }
 .entry-header .entry-title a {
@@ -1550,10 +1544,6 @@ img#wpstats {
 	.menu-toggle {
 		display: none;
 	}
-	.entry-header .entry-title {
-		font-size: 24px;
-		font-size: 1.714285714rem;
-	}
 	#respond form input[type="text"] {
 		width: 46.333333333%;
 	}
@@ -1753,18 +1743,24 @@ span.float {
 }
 
 /* STYLES KATHERINE ADDED */
+.active {
+	color: #636363;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: default;
+}
+
 .full-width {
 	width: 100%;
 }	
 
 #species-title {
-	font-size: 24px;
-	padding-bottom: 20px;
-	font-weight: normal;
+	padding-bottom: 24px;
 }
 
 .species-subtitle {
-	font-size: 20px;
+	font-family: Century Gothic, Arial, sans-serif;
+	font-size: 18px;
 	float: left;
 	font-weight: normal;
 	padding-bottom: 20px;

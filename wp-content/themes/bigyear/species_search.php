@@ -17,20 +17,28 @@
 	<div class="species-section">
 		<div class="filter-row-extra-space">
 			<a href="./">All "possible to see" species</a>
-			<a href="./?in_conservation_list=1">In Laura's conservation list</a>
-			<a href="./?is_lifer=1">Lifer for Laura</a>
+			<a <?php if ($_GET['in_conservation_list']==1) echo "class='active'"; ?> href="./?in_conservation_list=1">In Laura's conservation list</a>
+			<a <?php if ($_GET['is_lifer']==1) echo "class='active'"; ?>href="./?is_lifer=1">Lifer for Laura</a>
 		</div>
 		
 		<div class="filter-row">
 			<span>ESA status:</span>
-			<a href="./?esa_status_id=1">Endangered</a>
-			<a href="./?esa_status_id=2">Threatened</a>
+			<a <?php if ($_GET['esa_status_id']==1) echo "class='active'"; ?> href="./?esa_status_id=1">
+				Endangered
+			</a>
+			<a <?php if ($_GET['esa_status_id']==2) echo "class='active'"; ?> href="./?esa_status_id=2">
+				Threatened
+			</a>
 		</div>
 
 		<div class="filter-row extra-space">
 			<span>ABC status:</span>
-			<a href="./?abc_status_id=1">Red (Highest Continental Concern)</a>
-			<a href="./?abc_status_id=2">Yellow (Declining or Rare Continental Species)</a>
+			<a <?php if ($_GET['abc_status_id']==1) echo "class='active'"; ?> href="./?abc_status_id=1">
+				Red (Highest Continental Concern)
+			</a>
+			<a <?php if ($_GET['abc_status_id']==2) echo "class='active'"; ?>href="./?abc_status_id=2">
+				Yellow (Declining or Rare Continental Species)
+			</a>
 		</div>
 				
 	</div>
