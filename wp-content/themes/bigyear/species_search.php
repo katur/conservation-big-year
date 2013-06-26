@@ -9,12 +9,10 @@
 <div class="site-content full-width">
 	<h1 id="species-title">Big Year List</h1>
 
-	<div class="species-section">
-		Select filters below to narrow search.
-		Click a species name to see its page.
-	</div>
+	Select filters below to narrow search.
+	Click a species name to see its page.
 
-	<div class="species-section">
+	<div class="shaded-box">
 		<div class="filter-row-extra-space">
 			<a href="./">All "possible to see" species</a>
 			<a <?php if ($_GET['in_conservation_list']==1) echo "class='active'"; ?> href="./?in_conservation_list=1">In Laura's conservation list</a>
@@ -40,8 +38,7 @@
 				Yellow (Declining or Rare Continental Species)
 			</a>
 		</div>
-				
-	</div>
+	</div>	
 
 	<?php
 		// see if there is a filter term in the url

@@ -204,7 +204,7 @@ img {
 	line-height: 2.181818182;
 	font-weight: bold;
 	text-transform: uppercase;
-	color: #636363;
+	color: #444;
 }
 
 /* Shared Post Format styling */
@@ -318,7 +318,7 @@ input[type="reset"]:active {
 }
 li.bypostauthor cite span {
 	color: #fff;
-	background-color: #21759b;
+	background-color: #1c84c5;
 	background-image: none;
 	border: 1px solid #1f6f93;
 	border-radius: 2px;
@@ -503,7 +503,8 @@ body {
 }
 a {
 	outline: none;
-	color: #21759b;
+	color: #1c84c5;
+	text-decoration: none;
 }
 a:hover {
 	color: #0f3647;
@@ -563,7 +564,7 @@ a:hover {
 }
 .site-header h1 a:hover,
 .site-header h2 a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .site-header h1 {
 	font-size: 24px;
@@ -600,7 +601,7 @@ a:hover {
 	color: #5e5e5e;
 }
 .main-navigation a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .main-navigation ul.nav-menu,
 .main-navigation div.nav-menu > ul {
@@ -654,7 +655,7 @@ section[role="banner"] {
 	color: #757575;
 }
 .widget-area .widget a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .widget-area #s {
 	width: 53.66666666666%; /* define a width to avoid dropping a wider submit button */
@@ -680,7 +681,7 @@ footer[role="contentinfo"] a {
 	color: #686868;
 }
 footer[role="contentinfo"] a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 
 
@@ -727,7 +728,7 @@ footer[role="contentinfo"] a:hover {
 }
 .comments-link a:hover,
 .entry-meta a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 article.sticky .featured-post {
 	border-top: 4px double #ededed;
@@ -1152,7 +1153,7 @@ article.format-quote .entry-content blockquote {
 	color: #757575;
 }
 .format-status .entry-header header a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .format-status .entry-header img {
 	float: left;
@@ -1211,7 +1212,7 @@ article.format-quote .entry-content blockquote {
 	color: #5e5e5e;
 }
 .comments-area article header a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .comments-area article header cite a {
 	color: #444;
@@ -1257,7 +1258,7 @@ a.comment-edit-link {
 }
 a.comment-reply-link:hover,
 a.comment-edit-link:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .commentlist .pingback {
 	line-height: 1.714285714;
@@ -1353,7 +1354,7 @@ a.comment-edit-link:hover {
 	color: #757575;
 }
 .template-front-page .widget-area .widget li a:hover {
-	color: #21759b;
+	color: #1c84c5;
 }
 .template-front-page .widget-area .widget_text img {
 	float: left;
@@ -1538,7 +1539,7 @@ img#wpstats {
 	.main-navigation .current-menu-ancestor > a,
 	.main-navigation .current_page_item > a,
 	.main-navigation .current_page_ancestor > a {
-		color: #636363;
+		color: #444;
 		font-weight: bold;
 	}
 	.menu-toggle {
@@ -1680,7 +1681,7 @@ img#wpstats {
 	img.header-image,
 	.main-navigation {
 		display: none;
-	}
+	} 
 	.wrapper {
 		border-top: none;
 		box-shadow: none;
@@ -1744,7 +1745,7 @@ span.float {
 
 /* STYLES KATHERINE ADDED */
 .active {
-	color: #636363;
+	color: #444;
 	text-decoration: none;
 	font-weight: bold;
 	cursor: default;
@@ -1754,6 +1755,7 @@ span.float {
 	width: 100%;
 }	
 
+/* Species Search and Individual Species Pages */
 #species-title {
 	padding-bottom: 24px;
 }
@@ -1766,16 +1768,13 @@ span.float {
 	padding-bottom: 20px;
 }
 
-.species-section {
+/* Species Search */
+.shaded-box {
+	background: rgba(0, 0, 0, 0.036);
+	border-radius: 4px;
+	padding: 30px;
+	margin: 20px 0;
 	float: left;
-	clear: both;
-	padding-bottom: 40px;
-}
-
-.species-list span {
-	float: left;
-	clear: both;
-	padding-bottom: 5px;
 }
 
 .filter-row, .filter-row-extra-space {
@@ -1790,6 +1789,19 @@ span.float {
 
 .filter-row-extra-space a {
 	padding-right: 40px;
+}
+
+.species-list span {
+	float: left;
+	clear: both;
+	padding-bottom: 5px;
+}
+
+/* Individual Species Pages */
+.species-section {
+	float: left;
+	clear: both;
+	padding-bottom: 40px;
 }
 
 #primary-image {
@@ -1814,6 +1826,7 @@ span.float {
 	padding-bottom: 10px;
 }
 
+/* Photo Checklist */
 #photo-checklist {
 	background: black;
 	float: left;
