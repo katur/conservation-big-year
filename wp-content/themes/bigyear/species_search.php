@@ -11,34 +11,58 @@
 
 	Select filters below to narrow search.
 	Click a species name to see its page.
-
-	<div class="shaded-box">
-		<div class="filter-row-extra-space">
-			<a href="./">All "possible to see" species</a>
-			<a <?php if ($_GET['in_conservation_list']==1) echo "class='active'"; ?> href="./?in_conservation_list=1">In Laura's conservation list</a>
-			<a <?php if ($_GET['is_lifer']==1) echo "class='active'"; ?>href="./?is_lifer=1">Lifer for Laura</a>
-		</div>
+	
+	<div id="filter-top-row">
+		<a href="./"
+			<?php if (empty($_GET)) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			All "possible to see" species
+		</div></a>
+			
+		<a href="./?in_conservation_list=1"
+			<?php if ($_GET['in_conservation_list']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			In Laura's conservation list
+		</div></a>
+			
+		<a href="./?is_lifer=1"
+			<?php if ($_GET['is_lifer']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Lifer for Laura
+		</div></a>
+	</div>
+	
+	<div class="filter-row">	
+		<span>ESA status:</span>
 		
-		<div class="filter-row">
-			<span>ESA status:</span>
-			<a <?php if ($_GET['esa_status_id']==1) echo "class='active'"; ?> href="./?esa_status_id=1">
-				Endangered
-			</a>
-			<a <?php if ($_GET['esa_status_id']==2) echo "class='active'"; ?> href="./?esa_status_id=2">
-				Threatened
-			</a>
-		</div>
+		<a href="./?esa_status_id=1"
+			<?php if ($_GET['esa_status_id']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Endangered
+		</div></a>
 
-		<div class="filter-row extra-space">
-			<span>ABC status:</span>
-			<a <?php if ($_GET['abc_status_id']==1) echo "class='active'"; ?> href="./?abc_status_id=1">
-				Red (Highest Continental Concern)
-			</a>
-			<a <?php if ($_GET['abc_status_id']==2) echo "class='active'"; ?>href="./?abc_status_id=2">
-				Yellow (Declining or Rare Continental Species)
-			</a>
-		</div>
-	</div>	
+		<a href="./?esa_status_id=2"
+			<?php if ($_GET['esa_status_id']==2) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Threatened
+		</div></a>
+	</div>
+
+	<div class="filter-row">
+		<span>ABC status:</span>
+		
+		<a href="./?abc_status_id=1"
+			<?php if ($_GET['abc_status_id']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Red (Highest Continental Concern)
+		</div></a>
+		
+		<a href="./?abc_status_id=2"
+			<?php if ($_GET['abc_status_id']==2) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Yellow (Declining or Rare Continental Species)
+		</div></a>
+	</div>
 
 	<?php
 		// see if there is a filter term in the url
@@ -106,11 +130,6 @@
 					if ($is_probably_extinct)
 						echo " (Note: is probably extinct)";
 					echo "</span>";
-					
-					// if logged in, show links to edit
-					if ($_SESSION["logged_in"]) {
-						echo "<a href = '/edit/$url_common_name'>Edit</a>";
-					}
 				}
 			?>
 		</div>	

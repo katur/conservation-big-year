@@ -1464,7 +1464,6 @@ img#wpstats {
 	}
 	.site-header h1 {
 		font-size: 133px;
-		max-height: 133px;
 		margin-bottom: 0;
 		font-family: 'adelaidaregular';
 		font-weight: normal;
@@ -1744,13 +1743,6 @@ span.float {
 }
 
 /* STYLES KATHERINE ADDED */
-.active {
-	color: #444;
-	text-decoration: none;
-	font-weight: bold;
-	cursor: default;
-}
-
 .full-width {
 	width: 100%;
 }	
@@ -1769,26 +1761,38 @@ span.float {
 }
 
 /* Species Search */
-.shaded-box {
-	background: rgba(0, 0, 0, 0.036);
-	border-radius: 4px;
-	padding: 30px;
-	margin: 20px 0;
-	float: left;
-}
-
-.filter-row, .filter-row-extra-space {
+.filter-row, #filter-top-row {
 	float: left;
 	clear: both;
 	padding-bottom: 20px;
 }
 
-.filter-row a, .filter-row span {
-	padding-right: 10px;
+#filter-top-row {
+	padding-top: 20px;
 }
 
-.filter-row-extra-space a {
-	padding-right: 40px;
+.filter-shaded-box {
+	float: left;
+	background: rgba(0, 0, 0, 0.050);
+	border-radius: 4px;
+	padding: 10px;
+	margin-right: 20px;
+}
+
+.active-filter, .active-filter:hover {
+	text-decoration: none;
+	color: #ddd;
+	cursor: default;
+}
+
+.active-filter .filter-shaded-box {
+	background: #1c84c5;
+}
+
+.filter-row span {
+	float: left;
+	margin-right: 20px;
+	padding: 10px 0;
 }
 
 .species-list span {
