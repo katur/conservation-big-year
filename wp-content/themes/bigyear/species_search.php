@@ -125,7 +125,7 @@
 						echo " $date";
 					if ($state)
 						echo " in $state";
-					if ($is_lifer)
+					if ($is_lifer and $seen_this_year)
 						echo " <b>LIFER!</b> ";
 					if ($is_probably_extinct)
 						echo " (Note: is probably extinct)";
