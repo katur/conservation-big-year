@@ -149,24 +149,32 @@
 	</div>
 		
 
-	<!-- links -->
-	<div id='species-links' class='species-section'>
-		<!--<h2 class='species-subtitle'>Links</h2>-->
-		<?php
+	<!-- maps -->
+	<?php
+		if ($cornell_map or $ebird_map) {
+			echo "<h2 class='species-subtitle'>Maps</h2><div id='species-maps' class='species-section'>";
+		
 			if ($cornell_map)
 				echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";
 
 			if ($ebird_map) 
 				echo "<a href='$ebird_map' target='_blank'>eBird Dynamic Map</a>";
-		?>
-	</div>
+			
+			echo "</div>";
+		}
+	?>
+	
+	<!-- links -->
+	<!--<div id='species-links' class='species-section'>
+		<h2 class='species-subtitle'>Links</h2>
+	</div>-->
 
 	<!-- writing -->
 	<?php 
 		if ($essay)
 			echo "<div class='species-section'>
 					<h2 class='species-subtitle'>Conservation Concerns</h2>
-					<div id='essay'>$essay</div>
+					<div id='species-essay'>$essay</div>
 				</div>
 			";
 	?>
