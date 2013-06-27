@@ -1824,12 +1824,15 @@ span.float {
 	float: left;
 }
 
-#scientific-classification span, #conservation-classification span, #link-list a {
+#scientific-classification span, #conservation-classification span, #link-list a, #essay {
 	float: left;
 	clear: both;
 	padding-bottom: 10px;
 }
 
+#essay {
+	line-height: 1.3;
+}
 /* Photo Checklist */
 #photo-checklist {
 	background: black;

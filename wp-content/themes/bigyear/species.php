@@ -165,8 +165,8 @@
 	<?php 
 		if ($essay)
 			echo "<div class='species-section'>
-				<h2 class='species-subtitle'>Conservation Concerns</h2>
-				$essay
+					<h2 class='species-subtitle'>Conservation Concerns</h2>
+					<div id='essay'>$essay</div>
 				</div>
 			";
 	?>
