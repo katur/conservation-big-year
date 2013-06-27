@@ -16,13 +16,19 @@
 		<a href="./"
 			<?php if (empty($_GET)) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			All "possible to see" species
+			All "possible to see"
 		</div></a>
+		
+		<a href="./?seen_this_year=1"
+			<?php if ($_GET['seen_this_year']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Laura has seen this year
+		</div></a>	
 			
 		<a href="./?in_conservation_list=1"
 			<?php if ($_GET['in_conservation_list']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			In Laura's conservation list
+			Laura's conservation list
 		</div></a>
 			
 		<a href="./?is_lifer=1"
@@ -70,6 +76,7 @@
 		$esa_status_id = mysql_real_escape_string($_GET["esa_status_id"]);
 		$abc_status_id = mysql_real_escape_string($_GET["abc_status_id"]);
 		$is_lifer = mysql_real_escape_string($_GET["is_lifer"]);
+		$seen_this_year = mysql_real_escape_string($_GET["seen_this_year"]);
 		
 		// start building query
 		$query = "
@@ -92,6 +99,8 @@
 			$query = $query . " WHERE abc_status_id = $abc_status_id";	
 		else if ($is_lifer)
 			$query = $query . " WHERE is_lifer = $is_lifer";
+		else if ($seen_this_year)
+			$query = $query . " WHERE seen_this_year = $seen_this_year";
 
 		// order by aou_list id
 		$query = $query . " ORDER BY species_list.id";
