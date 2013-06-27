@@ -1890,3 +1890,16 @@ span.float {
 .photo-caption span.right {
 	float: right;
 }
+
+/* Edit Species Page */
+.edit-species h3 {
+	margin-top: 20px;
+	float: left;
+	clear: both;
+}
+
+.edit-species textarea, .edit-species input {
+	margin-top: 10px;
+	float: left;
+	clear: both;
+}
