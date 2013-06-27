@@ -16,8 +16,7 @@
 		is_probably_extinct, in_conservation_list, 
 		flickr_code,
 		abc_status_id, esa_status_id, 
-		cornell_map, ebird_map, 
-		conservation_concerns, cool_information 
+		cornell_map, ebird_map, essay 
 		FROM species_list 
 		WHERE url_common_name = '$url_common_name'
 	;";
@@ -48,8 +47,7 @@
 			$esa_status_id = $row["esa_status_id"];
 			$cornell_map = $row["cornell_map"];
 			$ebird_map = $row["ebird_map"];
-			$conservation_concerns = $row["conservation_concerns"];
-			$cool_information = $row["cool_information"];
+			$essay = $row["essay"];
 		}
 	}
 
@@ -165,17 +163,10 @@
 
 	<!-- writing -->
 	<?php 
-		if ($conservation_concerns)
+		if ($essay)
 			echo "<div class='species-section'>
 				<h2 class='species-subtitle'>Conservation Concerns</h2>
-				$conservation_concerns
-				</div>
-			";
-					
-		if ($cool_information)
-			echo "<div class='species-section'>
-				<h2 class='species-subtitle'>Cool Information</h2>
-				$cool_information
+				$essay
 				</div>
 			";
 	?>
