@@ -49,7 +49,7 @@
 		// count sightings
 		$query = "SELECT *
 			FROM sighting
-			WHERE id = '$sighting_id';
+			WHERE species_id = '$species_id';
 		";
 		$result = mysql_query($query) or die(mysql_error());
 		if (mysql_num_rows($result) == 0) {
