@@ -80,13 +80,13 @@
 		
 		// start building query
 		$query = "
-			SELECT DISTINCT common_name, seen_this_year,
+			SELECT common_name, seen_this_year,
 			is_lifer, url_common_name,
 			is_probably_extinct,
 			date, state,
 			flickr_code	
 			FROM species_list
-			LEFT OUTER JOIN sighting
+			LEFT JOIN sighting
 			ON species_list.id = sighting.species_id
 		";
 
@@ -103,7 +103,7 @@
 			$query = $query . " WHERE seen_this_year = $seen_this_year";
 
 		// order by aou_list id
-		$query = $query . " ORDER BY species_list.id";
+		$query = $query . " GROUP BY common_name ORDER BY species_list.id";
 
 		$result = mysql_query($query) or die(mysql_error());
 	?>

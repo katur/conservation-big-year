@@ -99,7 +99,8 @@
 			<?php
 				$sightings_query = "SELECT date, state 
 					FROM sighting 
-					WHERE species_id = $species_id;
+					WHERE species_id = $species_id
+					ORDER BY date;
 				";
 				$sightings_result = mysql_query($sightings_query) or die(mysql_error());
 				if (mysql_numrows($sightings_result) > 0) {
@@ -120,7 +121,6 @@
 						echo "<span>Would be a lifer for Laura</span>";
 					}
 				}
-
 			?>
 		</div>
 	</div>
@@ -165,9 +165,41 @@
 	?>
 	
 	<!-- links -->
-	<!--<div id='species-links' class='species-section'>
-		<h2 class='species-subtitle'>Links</h2>
-	</div>-->
+	<?php
+		$links_query = "SELECT link, link_name 
+			FROM link
+			WHERE species_id = $species_id;
+		";
+		$links_result = mysql_query($links_query) or die(mysql_error());
+		if (mysql_numrows($links_result) > 0) {
+			echo "<div id='species-links' class='species-section'>
+				<h2 class='species-subtitle'>Links</h2>";
+			while ($links_row = mysql_fetch_assoc($links_result)) {
+				$link = $links_row["link"];
+				$link_name = $links_row["link_name"];
+				echo "<a target='_blank' href='$link'>$link_name</a>";
+			}
+			echo "</div>";
+		}
+	?>
+
+	<!-- factoids -->
+	<?php
+		$factoids_query = "SELECT factoid 
+			FROM factoid
+			WHERE species_id = $species_id;
+		";
+		$factoids_result = mysql_query($factoids_query) or die(mysql_error());
+		if (mysql_numrows($factoids_result) > 0) {
+			echo "<h2 class='species-subtitle'>Factoids</h2>
+				<ul id='factoids' class='species-section'>";
+			while ($factoids_row = mysql_fetch_assoc($factoids_result)) {
+				$factoid = $factoids_row["factoid"];
+				echo "<li>$factoid</li>";
+			}
+			echo "</ul>";
+		}
+	?>
 
 	<!-- writing -->
 	<?php 
@@ -185,8 +217,8 @@
 					<a href='/edit-species-info/?common_name=$url_common_name'>
 						Edit Info
 					</a>
-					<a href='/edit-species-sighting/?common_name=$url_common_name'>
-						Add/Remove Sighting
+					<a href='/edit-species-lists/?common_name=$url_common_name'>
+						Add/Remove From List
 					</a>
 				</div>
 			";
