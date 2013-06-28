@@ -1,7 +1,7 @@
 <?php get_header(); 
 	include("katherine_connect.php");
 	/*
-	Template Name: Species Edit
+	Template Name: Edit Species Info
 	Copyright (c) 2013 Katherine Erickson
 	*/
 	
@@ -32,21 +32,21 @@
 		echo "
 			<div class='site-content full-width edit-species'>
 				<h2 class='species-subtitle'>
-					Edit information for <b>$common_name</b>.
+					Edit information for <b>$common_name</b>
 				</h2>
 			
-				<form method='post' action='/process-species-edit/?common_name=$url_common_name'>
-					<h3>Flickr Code for main photo (\"medium\", 500px max dimension)</h3>
+				<form method='post' action='/process-species-info/?common_name=$url_common_name'>
+					<h3>Flickr Code for main photo (\"medium\")</h3>
 					<textarea name='flickr_code' rows='3' cols='110'>$flickr_code</textarea>
 										
 					<h3>Essay</h3>
 					<textarea name='essay' rows='10' cols='110'>$essay</textarea>
 					
 					<h3>Cornell Range Map</h3>
-					<input name='cornell_map' type='text' size='150' value='$cornell_map'>
+					<input name='cornell_map' type='text' size='144' value='$cornell_map'>
 						
 					<h3>Ebird Dynamic Map</h3>
-					<input name='ebird_map' type='text' size='150' value='$ebird_map'>
+					<input name='ebird_map' type='text' size='144' value='$ebird_map'>
 				
 					<br><br>
 					<input type='submit' value='Submit to Database'></input>

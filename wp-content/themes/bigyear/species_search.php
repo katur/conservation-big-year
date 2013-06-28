@@ -80,14 +80,14 @@
 		
 		// start building query
 		$query = "
-			SELECT common_name, seen_this_year,
+			SELECT DISTINCT common_name, seen_this_year,
 			is_lifer, url_common_name,
 			is_probably_extinct,
 			date, state,
 			flickr_code	
 			FROM species_list
-			LEFT JOIN sightings
-			ON species_list.id = sightings.species_id
+			LEFT OUTER JOIN sighting
+			ON species_list.id = sighting.species_id
 		";
 
 		// if there is a filter term, add condition

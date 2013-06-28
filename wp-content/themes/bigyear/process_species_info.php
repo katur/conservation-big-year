@@ -1,7 +1,7 @@
 <?php	
 	include("katherine_connect.php");
 	/*
-	Template Name: Process Species Edit
+	Template Name: Process Species Info
 	Copyright (c) 2013 Katherine Erickson
 	*/
 	

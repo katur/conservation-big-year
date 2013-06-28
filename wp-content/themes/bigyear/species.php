@@ -98,7 +98,7 @@
 			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
 			<?php
 				$sightings_query = "SELECT date, state 
-					FROM sightings 
+					FROM sighting 
 					WHERE species_id = $species_id;
 				";
 				$sightings_result = mysql_query($sightings_query) or die(mysql_error());
@@ -171,12 +171,26 @@
 
 	<!-- writing -->
 	<?php 
-		if ($essay)
+		if ($essay) {
 			echo "<div class='species-section'>
 					<h2 class='species-subtitle'>Conservation Concerns</h2>
 					<div id='species-essay'>$essay</div>
 				</div>
 			";
+		}
+		
+		if (current_user_can( 'edit_pages' )) {
+			echo "
+				<div id='edit-buttons'>
+					<a href='/edit-species-info/?common_name=$url_common_name'>
+						Edit Info
+					</a>
+					<a href='/edit-species-sighting/?common_name=$url_common_name'>
+						Add/Remove Sighting
+					</a>
+				</div>
+			";
+		}
 	?>
 	</div>
 </div>
