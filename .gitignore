@@ -2,6 +2,9 @@ wp-config.php
 sql_backups
 wp-content/themes/bigyear/katherine_connect.php
 
+*/wp-config.php
+*/katherine_connect.php
+
 # Temporary files #
 # #################
 *.swp
