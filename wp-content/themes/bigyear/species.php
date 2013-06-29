@@ -218,7 +218,7 @@
 						Edit Info
 					</a>
 					<a href='/edit-species-lists/?common_name=$url_common_name'>
-						Add/Remove From List
+						Edit List-Type Info
 					</a>
 				</div>
 			";

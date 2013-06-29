@@ -9,7 +9,18 @@
 <div class="site-content full-width">
 	<h1 id="species-title">Big Year List</h1>
 
-	Select filters below to narrow search.
+<?php	
+	$species_query = "
+		SELECT common_name
+		FROM species_list
+		WHERE seen_this_year = '1'
+	";
+	$species_result = mysql_query($species_query) or die(mysql_error());
+	$total_seen = mysql_numrows($species_result);
+	echo "$total_seen species seen so far!!";
+?>
+
+	<br><br>Select options below to list species.
 	Click a species name to see its page.
 	
 	<div id="filter-top-row">

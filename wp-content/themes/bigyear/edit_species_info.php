@@ -37,10 +37,10 @@
 			
 				<form method='post' action='/process-species-info/?common_name=$url_common_name'>
 					<h3>Flickr Code for main photo (\"medium\")</h3>
-					<textarea name='flickr_code' rows='3' cols='110'>$flickr_code</textarea>
+					<textarea name='flickr_code' rows='5' cols='110'>$flickr_code</textarea>
 										
 					<h3>Essay</h3>
-					<textarea name='essay' rows='10' cols='110'>$essay</textarea>
+					<textarea name='essay' rows='12' cols='110'>$essay</textarea>
 					
 					<h3>Cornell Range Map</h3>
 					<input name='cornell_map' type='text' size='144' value='$cornell_map'>
