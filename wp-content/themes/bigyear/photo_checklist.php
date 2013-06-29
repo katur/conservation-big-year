@@ -17,10 +17,11 @@
 	
 	$species_query = "
 		SELECT common_name, date, state,
-		is_lifer, url_common_name, flickr_img_small
+		is_lifer, url_common_name, 
+		flickr_src, flickr_width, flickr_height
 		FROM species_list
-		LEFT JOIN sightings
-		ON species_list.id = sightings.species_id
+		LEFT JOIN sighting
+		ON species_list.id = sighting.species_id
 		WHERE seen_this_year = '1'
 		ORDER BY species_list.id	
 	";
@@ -48,14 +49,19 @@
 				$url_common_name = $row["url_common_name"];
 				$date = $row["date"];
 				$state = $row["state"];
-				$flickr_img_small = $row["flickr_img_small"];	
-
+				$flickr_src = $row["flickr_src"];	
+				$flickr_width = $row["flickr_width"];	
+				if ($flickr_width == 500) {
+					$flickr_src = preg_replace("/\.jpg/", "_n.jpg", $flickr_src);
+				}
+				$flickr_height = $row["flickr_height"] * (320 / $flickr_width);
+				$flickr_width = 320;
 				echo "<a href='/species/?common_name=$url_common_name'>
 					<div class='photo-and-caption'>";
-					if ($flickr_img_small)
-						echo "$flickr_img_small";
+					if ($flickr_src)
+						echo "<img src='$flickr_src' width='$flickr_width' height='$flickr_height' />";
 					else
-						echo "<img src='http://placekitten.com/500/333' width='340px' />";
+						echo "<img src='" . get_template_directory_uri() . "/camera-icon.png' height='220' width='320px' />";
 
 					echo "
 						<div class='photo-caption'>

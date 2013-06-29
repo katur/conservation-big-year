@@ -1,8 +1,8 @@
 $(document).ready(function(){
+	loadMasonry();
 })
 
 $(window).load(function(){
-	loadMasonry();
 })
 
 loadMasonry = function(){
