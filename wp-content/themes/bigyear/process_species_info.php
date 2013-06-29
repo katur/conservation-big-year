@@ -13,12 +13,25 @@
 	$cornell_map = $_POST['cornell_map'];
 	$ebird_map = $_POST['ebird_map'];
 	$essay = $_POST['essay'];
-	
-	$query = "UPDATE species_list
-		SET flickr_code = '$flickr_code', essay = '$essay',
-		ebird_map = '$ebird_map', cornell_map = '$cornell_map'
-		WHERE url_common_name = '$url_common_name'
-	";
+	if ($flickr_code) {
+		$src = preg_replace("/.+src=\"(.+?)\".+/", "$1", stripcslashes($flickr_code));
+		$width = preg_replace("/.+width=\"(.+?)\".+/", "$1", stripcslashes($flickr_code));
+		$height = preg_replace("/.+height=\"(.+?)\".+/", "$1", stripcslashes($flickr_code));
+		$query = "UPDATE species_list
+			SET flickr_code = '$flickr_code', flickr_src = '$src', 
+			flickr_width = '$width', flickr_height = '$height', essay = '$essay',
+			ebird_map = '$ebird_map', cornell_map = '$cornell_map'
+			WHERE url_common_name = '$url_common_name'
+		";
+	} else {
+		$query = "UPDATE species_list
+			SET flickr_code = NULL, flickr_src = NULL, 
+			flickr_width = NULL, flickr_height = NULL, essay = '$essay',
+			ebird_map = '$ebird_map', cornell_map = '$cornell_map'
+			WHERE url_common_name = '$url_common_name'
+		";
+	}
+
 
 	$result = mysql_query($query) or die(mysql_error());
 	
