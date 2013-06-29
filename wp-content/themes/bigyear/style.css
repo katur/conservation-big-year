@@ -496,8 +496,8 @@ html {
 	font-size: 87.5%;
 }
 body {
-	font-size: 15px;
-	font-family: Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	font-family: Times New Roman, serif;
 	text-rendering: optimizeLegibility;
 	color: #444;
 }
@@ -1493,6 +1493,7 @@ img#wpstats {
 		line-height: 3.692307692;
 		text-transform: uppercase;
 		white-space: nowrap;
+		font-family: Century Gothic, Arial, sans-serif;
 	}
 	.main-navigation li a:hover {
 		color: #000;
@@ -1778,6 +1779,8 @@ span.float {
 	border-radius: 4px;
 	padding: 10px;
 	margin-right: 20px;
+	font-size: 15px;
+	font-family: Century Gothic, Arial, sans-serif;
 }
 
 .active-filter, .active-filter:hover {
@@ -1894,7 +1897,7 @@ span.float {
 
 .photo-caption {
 	position: absolute;
-	width: 96%;
+	width: 97%;
 	display: block;
 	padding: 2%;
 	background: rgba(0,0,0,.5);
@@ -1904,6 +1907,7 @@ span.float {
 	bottom: 0;
 	left: 0;
 	color: white;
+	font-family: Century Gothic, Arial, sans-serif;
 }
 
 .photo-caption span.left {
