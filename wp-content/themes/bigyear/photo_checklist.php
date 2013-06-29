@@ -51,10 +51,10 @@
 				$state = $row["state"];
 				$flickr_src = $row["flickr_src"];	
 				$flickr_width = $row["flickr_width"];	
-				if ($flickr_width == 500) {
+				if ($flickr_width == 500)
 					$flickr_src = preg_replace("/\.jpg/", "_n.jpg", $flickr_src);
-				}
-				$flickr_height = $row["flickr_height"] * (320 / $flickr_width);
+				if ($flickr_src)
+					$flickr_height = $row["flickr_height"] * (320 / $flickr_width);
 				$flickr_width = 320;
 				echo "<a href='/species/?common_name=$url_common_name'>
 					<div class='photo-and-caption'>";
