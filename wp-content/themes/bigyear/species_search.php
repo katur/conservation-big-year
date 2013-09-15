@@ -9,33 +9,22 @@
 <div class="site-content full-width">
 	<h1 id="species-title">Big Year List</h1>
 
-<?php	
-	$species_query = "
-		SELECT common_name
-		FROM species_list
-		WHERE seen_this_year = '1'
-	";
-	$species_result = mysql_query($species_query) or die(mysql_error());
-	$total_seen = mysql_numrows($species_result);
-	echo "$total_seen species seen so far!!";
-?>
-
-	<br><br>Select options below to list species.
+	Select an option below to list species.
 	Click a species name to see its page.
 	
 	<div id="filter-top-row">
 		<a href="./"
 			<?php if (empty($_GET)) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			All "possible to see"
-		</div></a>
-		
-		<a href="./?seen_this_year=1"
-			<?php if ($_GET['seen_this_year']==1) echo "class='active-filter'"; ?>
-		><div class="filter-shaded-box">
 			Laura has seen this year
 		</div></a>	
 			
+		<a href="./?all=1"
+			<?php if ($_GET['all']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			All "possible to see"
+		</div></a>
+		
 		<a href="./?in_conservation_list=1"
 			<?php if ($_GET['in_conservation_list']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
@@ -83,11 +72,11 @@
 
 	<?php
 		// see if there is a filter term in the url
+		$all = mysql_real_escape_string($_GET["all"]);
 		$in_conservation_list = mysql_real_escape_string($_GET["in_conservation_list"]);
 		$esa_status_id = mysql_real_escape_string($_GET["esa_status_id"]);
 		$abc_status_id = mysql_real_escape_string($_GET["abc_status_id"]);
 		$is_lifer = mysql_real_escape_string($_GET["is_lifer"]);
-		$seen_this_year = mysql_real_escape_string($_GET["seen_this_year"]);
 		
 		// start building query
 		$query = "
@@ -104,14 +93,17 @@
 		// if there is a filter term, add condition
 		if ($in_conservation_list)
 			$query = $query . " WHERE in_conservation_list = $in_conservation_list";
-		if ($esa_status_id)
+		else if ($esa_status_id)
 			$query = $query . " WHERE esa_status_id = $esa_status_id";
 		else if ($abc_status_id)				
 			$query = $query . " WHERE abc_status_id = $abc_status_id";	
 		else if ($is_lifer)
 			$query = $query . " WHERE is_lifer = $is_lifer";
-		else if ($seen_this_year)
-			$query = $query . " WHERE seen_this_year = $seen_this_year";
+		else if ($all)
+			$query = $query;
+		else
+			$query = $query . " WHERE seen_this_year = 1";
+
 
 		// order by aou_list id
 		$query = $query . " GROUP BY common_name ORDER BY species_list.id";
