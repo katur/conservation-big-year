@@ -496,7 +496,7 @@ html {
 	font-size: 87.5%;
 }
 body {
-	font-size: 18px;
+	font-size: 17px;
 	font-family: Georgia, serif;
 	text-rendering: optimizeLegibility;
 	color: #444;
@@ -1763,13 +1763,10 @@ span.float {
 }
 
 /* Species Search */
-.filter-row, #filter-top-row {
+#filters {
 	float: left;
 	clear: both;
-	padding-bottom: 20px;
-}
-
-#filter-top-row {
+	width: 100%;
 	padding-top: 20px;
 }
 
@@ -1779,7 +1776,8 @@ span.float {
 	border-radius: 4px;
 	padding: 10px;
 	margin-right: 20px;
-	font-size: 15px;
+	margin-bottom: 20px;
+	font-size: 13px;
 	font-family: Century Gothic, Arial, sans-serif;
 }
 
@@ -1793,13 +1791,14 @@ span.float {
 	background: #1c84c5;
 }
 
-.filter-row span {
+#species-list {
 	float: left;
-	margin-right: 20px;
-	padding: 10px 0;
+	width: 100%;
+	border-top: 1px solid #ededed;
+	padding-top: 30px;
 }
 
-.species-list span {
+#species-list span {
 	float: left;
 	clear: both;
 	padding-bottom: 5px;

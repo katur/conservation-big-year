@@ -12,7 +12,7 @@
 	Select an option below to list species.
 	Click a species name to see its page.
 	
-	<div id="filter-top-row">
+	<div id="filters">
 		<a href="./"
 			<?php if (empty($_GET)) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
@@ -36,37 +36,29 @@
 		><div class="filter-shaded-box">
 			Lifer for Laura
 		</div></a>
-	</div>
-	
-	<div class="filter-row">	
-		<span>ESA status:</span>
 		
 		<a href="./?esa_status_id=1"
 			<?php if ($_GET['esa_status_id']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			Endangered
+			ESA status: Endangered
 		</div></a>
-
+	
 		<a href="./?esa_status_id=2"
 			<?php if ($_GET['esa_status_id']==2) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			Threatened
+			ESA status: Threatened
 		</div></a>
-	</div>
 
-	<div class="filter-row">
-		<span>ABC status:</span>
-		
 		<a href="./?abc_status_id=1"
 			<?php if ($_GET['abc_status_id']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			Red (Highest Continental Concern)
+			ABC status: Red (Highest Continental Concern)
 		</div></a>
 		
 		<a href="./?abc_status_id=2"
 			<?php if ($_GET['abc_status_id']==2) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
-			Yellow (Declining or Rare Continental Species)
+			ABC status: Yellow (Declining or Rare Continental Species)
 		</div></a>
 	</div>
 
@@ -111,40 +103,38 @@
 		$result = mysql_query($query) or die(mysql_error());
 	?>
 
-	<div class="species-section">
+	<div id="species-list">
 		<h2 class='species-subtitle'>
 			<?php echo mysql_numrows($result); ?>
 			species
 		</h2>
 		
-		<div class='species-list'>	
-			<?php		
-				while ($row = mysql_fetch_assoc($result)) {
-					$common_name = $row["common_name"];
-					$seen_this_year = $row["seen_this_year"];
-					$is_lifer = $row["is_lifer"];
-					$url_common_name = $row["url_common_name"];
-					$date = $row["date"];
-					$state = $row["state"];
-					$flickr_code = $row["flickr_code"];
-					$is_probably_extinct = $row["is_probably_extinct"];
-					
-					echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name</a>";
+		<?php		
+			while ($row = mysql_fetch_assoc($result)) {
+				$common_name = $row["common_name"];
+				$seen_this_year = $row["seen_this_year"];
+				$is_lifer = $row["is_lifer"];
+				$url_common_name = $row["url_common_name"];
+				$date = $row["date"];
+				$state = $row["state"];
+				$flickr_code = $row["flickr_code"];
+				$is_probably_extinct = $row["is_probably_extinct"];
+				
+				echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name</a>";
 
-					if ($seen_this_year)
-						echo " &#x2713;";
-					if ($date)
-						echo " $date";
-					if ($state)
-						echo " in $state";
-					if ($is_lifer and $seen_this_year)
-						echo " <b>LIFER!</b> ";
-					if ($is_probably_extinct)
-						echo " (Note: is probably extinct)";
-					echo "</span>";
-				}
-			?>
-		</div>	
+				if ($seen_this_year)
+					echo " &#x2713;";
+				if ($date)
+					echo " $date";
+				if ($state)
+					echo " in $state";
+				if ($is_lifer and $seen_this_year)
+					echo " <b>LIFER!</b> ";
+				if ($is_probably_extinct)
+					echo " (Note: is probably extinct)";
+				echo "</span>";
+			}
+		?>
 	</div>
 </div>
 <?php get_footer(); ?>
