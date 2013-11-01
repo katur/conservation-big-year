@@ -1,5 +1,5 @@
-Conservation Big Year Wordpress Theme
-=====================================
+Wordpress Theme for Conservation Big Year Website
+=================================================
 
 Modified Wordpress2012 theme.
 
