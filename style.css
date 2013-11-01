@@ -1839,6 +1839,7 @@ span.float {
 
 #scientific-classification ul {
 	list-style: square inside;
+	padding-top: 10px;
 }
 
 #factoids li {
