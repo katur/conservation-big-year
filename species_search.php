@@ -19,22 +19,28 @@
 			Laura has seen this year
 		</div></a>
 
+		<a href="./?is_lifer=1&seen=1"
+			<?php if ($_GET['is_lifer']==1 && $_GET['seen']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Lifers this year
+		</div></a>
+
 		<a href="./?all=1"
 			<?php if ($_GET['all']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			All "possible to see"
 		</div></a>
 
+		<a href="./?is_lifer=1"
+			<?php if ($_GET['is_lifer']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			All would-be lifers
+		</div></a>
+
 		<a href="./?in_conservation_list=1"
 			<?php if ($_GET['in_conservation_list']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			Laura's conservation list
-		</div></a>
-
-		<a href="./?is_lifer=1"
-			<?php if ($_GET['is_lifer']==1) echo "class='active-filter'"; ?>
-		><div class="filter-shaded-box">
-			Lifer for Laura
 		</div></a>
 
 		<a href="./?esa_status_id=1"
@@ -65,6 +71,7 @@
 	<?php
 		// see if there is a filter term in the url
 		$all = mysql_real_escape_string($_GET["all"]);
+		$seen = mysql_real_escape_string($_GET["seen"]);
 		$in_conservation_list = mysql_real_escape_string($_GET["in_conservation_list"]);
 		$esa_status_id = mysql_real_escape_string($_GET["esa_status_id"]);
 		$abc_status_id = mysql_real_escape_string($_GET["abc_status_id"]);
@@ -89,6 +96,8 @@
 			$query = $query . " WHERE esa_status_id = $esa_status_id";
 		else if ($abc_status_id)
 			$query = $query . " WHERE abc_status_id = $abc_status_id";
+		else if ($is_lifer && $seen)
+			$query = $query . " WHERE is_lifer = $is_lifer AND seen_this_year = 1";
 		else if ($is_lifer)
 			$query = $query . " WHERE is_lifer = $is_lifer";
 		else if ($all)
