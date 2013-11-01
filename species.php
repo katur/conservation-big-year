@@ -107,18 +107,26 @@
 				";
 				$sightings_result = mysql_query($sightings_query) or die(mysql_error());
 				if (mysql_numrows($sightings_result) > 0) {
+					$sightings_row = mysql_fetch_assoc($sightings_result);
+					$date = date("M j, Y", strtotime($sightings_row["date"]));
+					$state = $sightings_row["state"];
+					echo "<span>&#x2713; First seen on $date in $state</span>";
+
 					while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
 						$date = date("M j, Y", strtotime($sightings_row["date"]));
 						$state = $sightings_row["state"];
-						echo "<span>&#x2713; Seen on $date in $state</span>";
+						echo "<span>$date in $state</span>";
 					}
+
 					if ($is_lifer) {
+						echo "<span></span>";
 						echo "<span>LIFER!!</span>";
 					}
+
 					if ($seen_only_in_refuge)
-						echo "<span>Seen only within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge System</a></span>";
+						echo "<span></span><span>Seen only within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge System</a></span>";
 					else if ($seen_in_refuge)
-						echo "<span>Seen within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge System</a></span>";
+						echo "<span></span><span>Seen within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge System</a></span>";
 
 				} else {
 					if ($is_lifer) {
