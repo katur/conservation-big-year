@@ -25,6 +25,18 @@
 			Lifers this year
 		</div></a>
 
+		<a href="./?seen_in_refuge=1"
+			<?php if ($_GET['seen_in_refuge']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Seen in National Wildlife Refuge System
+		</div></a>
+
+		<a href="./?seen_only_in_refuge=1"
+			<?php if ($_GET['seen_only_in_refuge']==1) echo "class='active-filter'"; ?>
+		><div class="filter-shaded-box">
+			Seen only in National Wildlife Refuge System
+		</div></a>
+
 		<a href="./?all=1"
 			<?php if ($_GET['all']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
@@ -72,6 +84,8 @@
 		// see if there is a filter term in the url
 		$all = mysql_real_escape_string($_GET["all"]);
 		$seen = mysql_real_escape_string($_GET["seen"]);
+		$seen_in_refuge = mysql_real_escape_string($_GET["seen_in_refuge"]);
+		$seen_only_in_refuge = mysql_real_escape_string($_GET["seen_only_in_refuge"]);
 		$in_conservation_list = mysql_real_escape_string($_GET["in_conservation_list"]);
 		$esa_status_id = mysql_real_escape_string($_GET["esa_status_id"]);
 		$abc_status_id = mysql_real_escape_string($_GET["abc_status_id"]);
@@ -103,6 +117,10 @@
 			$query = $query . " WHERE is_lifer = $is_lifer";
 		else if ($all)
 			$query = $query;
+		else if ($seen_in_refuge)
+			$query = $query . " WHERE seen_in_refuge = 1";
+		else if ($seen_only_in_refuge)
+			$query = $query . " WHERE seen_only_in_refuge = 1";
 		else
 			$query = $query . " WHERE seen_this_year = 1";
 
@@ -132,14 +150,14 @@
 				$flickr_code = $row["flickr_code"];
 				$is_probably_extinct = $row["is_probably_extinct"];
 
-				echo "<span><a href = '/species/?common_name=$url_common_name'>";
+				echo "<span>";
 
 				if ($seen_only_in_refuge)
 					echo "**";
 				else if ($seen_in_refuge)
 					echo "*";
 
-				echo "$common_name";
+				echo "<a href='/species/?common_name=$url_common_name'>$common_name";
 
 				if ($is_probably_extinct)
 					echo " (probably extinct)";
