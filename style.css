@@ -1682,7 +1682,7 @@ img#wpstats {
 	img.header-image,
 	.main-navigation {
 		display: none;
-	} 
+	}
 	.wrapper {
 		border-top: none;
 		box-shadow: none;
@@ -1747,7 +1747,7 @@ span.float {
 /* STYLES KATHERINE ADDED */
 .full-width {
 	width: 100%;
-}	
+}
 
 /* Species Search and Individual Species Pages */
 #species-title {
@@ -1820,14 +1820,18 @@ span.float {
 #scientific-classification {
 	float: left;
 	width: 440px;
-}	
+}
 
 #conservation-classification {
 	float: left;
 }
 
-#scientific-classification span, 
-#conservation-classification span, 
+#scientific-classification ul {
+	list-style-type: circle;
+}
+
+#scientific-classification span,
+#conservation-classification span,
 #species-links a,
 #species-essay,
 #link-list a {
