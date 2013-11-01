@@ -110,7 +110,11 @@
 					$sightings_row = mysql_fetch_assoc($sightings_result);
 					$date = date("M j, Y", strtotime($sightings_row["date"]));
 					$state = $sightings_row["state"];
-					echo "<span>&#x2713; First seen on $date in $state</span>";
+					echo "<span>&#x2713; First seen on $date in $state";
+					if ($is_lifer) {
+						echo ": LIFER!!";
+					}
+					echo "</span>";
 
 					while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
 						$date = date("M j, Y", strtotime($sightings_row["date"]));
@@ -118,10 +122,6 @@
 						echo "<span>$date in $state</span>";
 					}
 
-					if ($is_lifer) {
-						echo "<span></span>";
-						echo "<span>LIFER!!</span>";
-					}
 
 					if ($seen_only_in_refuge)
 						echo "<span></span><span>Seen only within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge System</a></span>";
