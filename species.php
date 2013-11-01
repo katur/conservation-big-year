@@ -116,7 +116,7 @@
 					}
 					echo "</span>";
 					if ($sightings_row = mysql_fetch_assoc($sightings_result)) {
-						echo "<span>Also seen on:<ul>";
+						echo "<span>Other sightings:<ul>";
 						while ($sightings_row) {
 							$date = date("M j, Y", strtotime($sightings_row["date"]));
 							$state = $sightings_row["state"];
