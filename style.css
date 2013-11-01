@@ -1826,14 +1826,6 @@ span.float {
 	float: left;
 }
 
-#scientific-classification ul {
-	list-style:square inside;
-}
-
-#scientific-classification li {
-
-}
-
 #scientific-classification span,
 #conservation-classification span,
 #species-links a,
@@ -1842,6 +1834,11 @@ span.float {
 	float: left;
 	clear: both;
 	padding-bottom: 10px;
+	min-width: 100%;
+}
+
+#scientific-classification ul {
+	list-style: square inside;
 }
 
 #factoids li {
