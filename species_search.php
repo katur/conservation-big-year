@@ -80,6 +80,7 @@
 		// start building query
 		$query = "
 			SELECT common_name, seen_this_year,
+			seen_in_refuge, seen_only_in_refuge,
 			is_lifer, url_common_name,
 			is_probably_extinct,
 			date, state,
@@ -122,6 +123,8 @@
 			while ($row = mysql_fetch_assoc($result)) {
 				$common_name = $row["common_name"];
 				$seen_this_year = $row["seen_this_year"];
+				$seen_in_refuge = $row["seen_in_refuge"];
+				$seen_only_in_refuge = $row["seen_only_in_refuge"];
 				$is_lifer = $row["is_lifer"];
 				$url_common_name = $row["url_common_name"];
 				$date = $row["date"];
@@ -129,7 +132,14 @@
 				$flickr_code = $row["flickr_code"];
 				$is_probably_extinct = $row["is_probably_extinct"];
 
-				echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name";
+				echo "<span><a href = '/species/?common_name=$url_common_name'>";
+
+				if ($seen_only_in_refuge)
+					echo "**";
+				else if ($seen_in_refuge)
+					echo "*";
+
+				echo "$common_name";
 
 				if ($is_probably_extinct)
 					echo " (probably extinct)";
@@ -149,6 +159,11 @@
 				echo "</span>";
 			}
 		?>
+	</div>
+
+	<div id="refuge-asterisks">
+		<span>* Seen within the <a href="http://www.fws.gov/refuges/" target="_blank">National Wildlife Refuge System</a></span>
+		<span>** Seen only within the <a href="http://www.fws.gov/refuges/" target="_blank">National Wildlife Refuge System</a></span>
 	</div>
 </div>
 <?php get_footer(); ?>

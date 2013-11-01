@@ -1804,6 +1804,18 @@ span.float {
 	padding-bottom: 5px;
 }
 
+#refuge-asterisks {
+	float: left;
+	padding-top: 30px;
+}
+
+#refuge-asterisks span {
+	width: 100%;
+	float: left;
+	clear: both;
+	padding-top: 10px;
+}
+
 /* Individual Species Pages */
 .species-section {
 	float: left;
