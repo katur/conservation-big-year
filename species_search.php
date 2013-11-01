@@ -32,7 +32,7 @@
 		</div></a>
 
 		<a href="./?is_lifer=1"
-			<?php if ($_GET['is_lifer']==1) echo "class='active-filter'"; ?>
+			<?php if ($_GET['is_lifer']==1 && $_GET['seen']==0) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			All would-be lifers
 		</div></a>
