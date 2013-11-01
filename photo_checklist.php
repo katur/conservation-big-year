@@ -16,13 +16,14 @@
 	$family_result = mysql_query($family_query) or die(mysql_error());
 
 	$species_query = "
-		SELECT common_name, date, state,
+		SELECT common_name, MIN(date), state,
 		is_lifer, url_common_name,
 		flickr_src, flickr_width, flickr_height
 		FROM species_list
 		LEFT JOIN sighting
 		ON species_list.id = sighting.species_id
 		WHERE seen_this_year = '1'
+		GROUP BY common_name
 		ORDER BY species_list.id
 	";
 
