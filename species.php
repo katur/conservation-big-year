@@ -1,30 +1,30 @@
-<?php get_header(); 
+<?php get_header();
 	include("katherine_connect.php");
 	/*
 	Template Name: Species
 	Copyright (c) 2013 Katherine Erickson
 	*/
 
-	// get the common name from the url. 
+	// get the common name from the url.
 	// (php-format url available via htaccess file)
 	$url_common_name = mysql_real_escape_string($_GET['common_name']);
 
 	// define MySQL query for info on current species
-	$query = "SELECT id, common_name, scientific_name, 
-		species_list.order, family, family_common, subfamily, 
-		seen_this_year, is_lifer, 
-		is_probably_extinct, in_conservation_list, 
+	$query = "SELECT id, common_name, scientific_name,
+		species_list.order, family, family_common, subfamily,
+		seen_this_year, is_lifer,
+		is_probably_extinct, in_conservation_list,
 		flickr_code,
-		abc_status_id, esa_status_id, 
-		cornell_map, ebird_map, essay 
-		FROM species_list 
+		abc_status_id, esa_status_id,
+		cornell_map, ebird_map, essay
+		FROM species_list
 		WHERE url_common_name = '$url_common_name'
 	;";
 
 	// run query
 	$result = mysql_query($query) or die(mysql_error());
 	if (mysql_num_rows($result) != 1) {
-		echo "The bird in the URL is not on the list, 
+		echo "The bird in the URL is not on the list,
 			is spelled differently,
 			or had more than one match.";
 
@@ -60,7 +60,7 @@
 			$abc_long = $abc_row["status"];
 		}
 	}
-	
+
 	$esa_query = "SELECT status FROM esa_status WHERE id = $esa_status_id;";
 	$esa_result = mysql_query($esa_query) or die(mysql_error());
 	if (mysql_num_rows($esa_result) == 0) {
@@ -72,9 +72,9 @@
 	}
 
 ?>
-<div class="site-content full-width">	
+<div class="site-content full-width">
 	<h1 id="species-title">
-		<?php echo $common_name; 
+		<?php echo $common_name;
 			if ($seen_this_year)
 				echo " &#x2713;";
 		?>
@@ -82,11 +82,11 @@
 
 	<!-- general -->
 	<div class="species-section">
-		<!-- image -->	
+		<!-- image -->
 		<div id="primary-image">
 			<?php echo $flickr_code ?>
 		</div>
-		
+
 		<!-- scientific classification -->
 		<div id="scientific-classification">
 			<?php
@@ -97,25 +97,22 @@
 			<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
 			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
 			<?php
-				$sightings_query = "SELECT date, state 
-					FROM sighting 
+				$sightings_query = "SELECT date, state
+					FROM sighting
 					WHERE species_id = $species_id
 					ORDER BY date;
 				";
 				$sightings_result = mysql_query($sightings_query) or die(mysql_error());
 				if (mysql_numrows($sightings_result) > 0) {
-					if ($is_lifer) {
-						$sightings_row = mysql_fetch_assoc($sightings_result);
-						$date = $sightings_row["date"];
-						$state = $sightings_row["state"];
-						echo "<span>&#x2713; Seen on $date in $state. LIFER!!</span>";
-					}
-					
 					while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
-						$date = $sightings_row["date"];
+						$date = date("M j, Y", strtotime($sightings_row["date"]));
 						$state = $sightings_row["state"];
 						echo "<span>&#x2713; Seen on $date in $state</span>";
 					}
+					if ($is_lifer) {
+						echo "<span>LIFER!!</span>";
+					}
+
 				} else {
 					if ($is_lifer) {
 						echo "<span>Would be a lifer for Laura</span>";
@@ -124,49 +121,49 @@
 			?>
 		</div>
 	</div>
-		
+
 	<!-- conservation information -->
 	<div id="conservation-classification" class="species-section">
 		<h2 class="species-subtitle">Conservation Classification</h2>
 		<span>
 			<?php
-				if ($in_conservation_list) 
+				if ($in_conservation_list)
 					echo "In Laura's Conservation List";
 				else
 					echo "Not in Laura's Conservation List";
 			?>
 		</span>
-		
+
 		<span>
 			<a href="http://www.abcbirds.org/abcprograms/science/watchlist/index.html" target="_blank">ABC WatchList</a>:
 			<?php echo $abc_long; ?>
 		</span>
-		
+
 		<span>
 			<a href="http://www.fws.gov/endangered/species/index.html" target="_blank">ESA Status</a>:
 			<?php echo $esa_long; ?>
 		</span>
 	</div>
-		
+
 
 	<!-- maps -->
 	<?php
 		if ($cornell_map or $ebird_map) {
 			echo "<h2 class='species-subtitle'>Maps</h2><div id='species-maps' class='species-section'>";
-		
+
 			if ($cornell_map)
 				echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";
 
-			if ($ebird_map) 
+			if ($ebird_map)
 				echo "<a href='$ebird_map' target='_blank'>eBird Dynamic Map</a>";
-			
+
 			echo "</div>";
 		}
 	?>
-	
+
 	<!-- links -->
 	<?php
-		$links_query = "SELECT link, link_name 
+		$links_query = "SELECT link, link_name
 			FROM link
 			WHERE species_id = $species_id;
 		";
@@ -185,7 +182,7 @@
 
 	<!-- factoids -->
 	<?php
-		$factoids_query = "SELECT factoid 
+		$factoids_query = "SELECT factoid
 			FROM factoid
 			WHERE species_id = $species_id;
 		";
@@ -202,7 +199,7 @@
 	?>
 
 	<!-- writing -->
-	<?php 
+	<?php
 		if ($essay) {
 			echo "<div class='species-section'>
 					<h2 class='species-subtitle'>Conservation Concerns</h2>
@@ -210,7 +207,7 @@
 				</div>
 			";
 		}
-		
+
 		if (current_user_can( 'edit_pages' )) {
 			echo "
 				<div id='edit-buttons'>
