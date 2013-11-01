@@ -1827,7 +1827,11 @@ span.float {
 }
 
 #scientific-classification ul {
-	list-style:circle inside;
+	list-style:square inside;
+}
+
+#scientific-classification li {
+
 }
 
 #scientific-classification span,
