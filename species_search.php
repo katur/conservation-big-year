@@ -138,9 +138,10 @@
 
 				if ($seen_this_year)
 					echo " &#x2713;";
-				if ($date)
+				if ($date) {
 					$date = date("M j", strtotime($row["date"]));
 					echo " $date";
+				}
 				if ($state)
 					echo " in $state";
 				if ($is_lifer and $seen_this_year)
