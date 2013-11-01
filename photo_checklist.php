@@ -16,7 +16,7 @@
 	$family_result = mysql_query($family_query) or die(mysql_error());
 
 	$species_query = "
-		SELECT common_name, MIN(date), state,
+		SELECT common_name, MIN(date) AS date, state,
 		is_lifer, url_common_name,
 		flickr_src, flickr_width, flickr_height
 		FROM species_list
