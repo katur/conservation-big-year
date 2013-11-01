@@ -147,9 +147,9 @@
 		<span>
 			<?php
 				if ($in_conservation_list)
-					echo "In Laura's Conservation List";
+					echo "On Laura's Conservation List";
 				else
-					echo "Not in Laura's Conservation List";
+					echo "Not on Laura's Conservation List";
 			?>
 		</span>
 
