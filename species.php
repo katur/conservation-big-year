@@ -12,7 +12,7 @@
 	// define MySQL query for info on current species
 	$query = "SELECT id, common_name, scientific_name,
 		species_list.order, family, family_common, subfamily,
-		seen_this_year, is_lifer,
+		seen_this_year, seen_in_refuge, seen_only_in_refuge, is_lifer,
 		is_probably_extinct, in_conservation_list,
 		flickr_code,
 		abc_status_id, esa_status_id,
@@ -39,6 +39,8 @@
 			$family_common = $row["family_common"];
 			$subfamily = $row["subfamily"];
 			$seen_this_year = $row["seen_this_year"];
+			$seen_in_refuge = $row["seen_in_refuge"];
+			$seen_only_in_refuge = $row["seen_only_in_refuge"];
 			$is_lifer = $row["is_lifer"];
 			$is_probably_extinct = $row["is_probably_extinct"];
 			$in_conservation_list = $row["in_conservation_list"];
@@ -96,6 +98,7 @@
 			<span>Family: <?php echo "$family ($family_common)"; ?> </span>
 			<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
 			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
+			<span></span>
 			<?php
 				$sightings_query = "SELECT date, state
 					FROM sighting
@@ -112,6 +115,10 @@
 					if ($is_lifer) {
 						echo "<span>LIFER!!</span>";
 					}
+					if ($seen_only_in_refuge)
+						echo "<span>Seen ONLY in National Wildlife Refuges</span>";
+					else if ($seen_in_refuge)
+						echo "<span>At least one sighting in a National Wildlife Refuge</span>";
 
 				} else {
 					if ($is_lifer) {
