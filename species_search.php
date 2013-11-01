@@ -153,9 +153,9 @@
 				echo "<span>";
 
 				if ($seen_only_in_refuge)
-					echo "**";
+					echo "** ";
 				else if ($seen_in_refuge)
-					echo "*";
+					echo "* ";
 
 				echo "<a href='/species/?common_name=$url_common_name'>$common_name";
 
