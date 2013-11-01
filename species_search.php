@@ -1,4 +1,4 @@
-<?php get_header(); 
+<?php get_header();
 	include("katherine_connect.php");
 	/*
 	Template Name: Species Search
@@ -11,38 +11,38 @@
 
 	Select an option below to list species.
 	Click a species name to see its page.
-	
+
 	<div id="filters">
 		<a href="./"
 			<?php if (empty($_GET)) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			Laura has seen this year
-		</div></a>	
-			
+		</div></a>
+
 		<a href="./?all=1"
 			<?php if ($_GET['all']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			All "possible to see"
 		</div></a>
-		
+
 		<a href="./?in_conservation_list=1"
 			<?php if ($_GET['in_conservation_list']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			Laura's conservation list
 		</div></a>
-			
+
 		<a href="./?is_lifer=1"
 			<?php if ($_GET['is_lifer']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			Lifer for Laura
 		</div></a>
-		
+
 		<a href="./?esa_status_id=1"
 			<?php if ($_GET['esa_status_id']==1) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
 			ESA status: Endangered
 		</div></a>
-	
+
 		<a href="./?esa_status_id=2"
 			<?php if ($_GET['esa_status_id']==2) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
@@ -54,7 +54,7 @@
 		><div class="filter-shaded-box">
 			ABC status: Red (Highest Continental Concern)
 		</div></a>
-		
+
 		<a href="./?abc_status_id=2"
 			<?php if ($_GET['abc_status_id']==2) echo "class='active-filter'"; ?>
 		><div class="filter-shaded-box">
@@ -69,14 +69,14 @@
 		$esa_status_id = mysql_real_escape_string($_GET["esa_status_id"]);
 		$abc_status_id = mysql_real_escape_string($_GET["abc_status_id"]);
 		$is_lifer = mysql_real_escape_string($_GET["is_lifer"]);
-		
+
 		// start building query
 		$query = "
 			SELECT common_name, seen_this_year,
 			is_lifer, url_common_name,
 			is_probably_extinct,
 			date, state,
-			flickr_code	
+			flickr_code
 			FROM species_list
 			LEFT JOIN sighting
 			ON species_list.id = sighting.species_id
@@ -87,8 +87,8 @@
 			$query = $query . " WHERE in_conservation_list = $in_conservation_list";
 		else if ($esa_status_id)
 			$query = $query . " WHERE esa_status_id = $esa_status_id";
-		else if ($abc_status_id)				
-			$query = $query . " WHERE abc_status_id = $abc_status_id";	
+		else if ($abc_status_id)
+			$query = $query . " WHERE abc_status_id = $abc_status_id";
 		else if ($is_lifer)
 			$query = $query . " WHERE is_lifer = $is_lifer";
 		else if ($all)
@@ -108,8 +108,8 @@
 			<?php echo mysql_numrows($result); ?>
 			species
 		</h2>
-		
-		<?php		
+
+		<?php
 			while ($row = mysql_fetch_assoc($result)) {
 				$common_name = $row["common_name"];
 				$seen_this_year = $row["seen_this_year"];
@@ -119,8 +119,13 @@
 				$state = $row["state"];
 				$flickr_code = $row["flickr_code"];
 				$is_probably_extinct = $row["is_probably_extinct"];
-				
-				echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name</a>";
+
+				echo "<span><a href = '/species/?common_name=$url_common_name'>$common_name";
+
+				if ($is_probably_extinct)
+					echo " (probably extinct)";
+
+				echo "</a>";
 
 				if ($seen_this_year)
 					echo " &#x2713;";
@@ -130,8 +135,6 @@
 					echo " in $state";
 				if ($is_lifer and $seen_this_year)
 					echo " <b>LIFER!</b> ";
-				if ($is_probably_extinct)
-					echo " (Note: is probably extinct)";
 				echo "</span>";
 			}
 		?>
