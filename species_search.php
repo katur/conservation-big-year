@@ -8,10 +8,6 @@
 
 <div class="site-content full-width">
 	<h1 id="species-title">Big Year List</h1>
-
-	Select an option below to list species.
-	Click a species name to see its page.
-
 	<div id="filters">
 		<a href="./"
 			<?php if (empty($_GET)) echo "class='active-filter'"; ?>
