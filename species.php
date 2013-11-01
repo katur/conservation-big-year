@@ -116,9 +116,9 @@
 						echo "<span>LIFER!!</span>";
 					}
 					if ($seen_only_in_refuge)
-						echo "<span>Seen ONLY in National Wildlife Refuges</span>";
+						echo "<span>Seen only within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge system</a></span>";
 					else if ($seen_in_refuge)
-						echo "<span>At least one sighting in a National Wildlife Refuge</span>";
+						echo "<span>Seen within the <a href='http://www.fws.gov/refuges/' target='_blank'>National Wildlife Refuge system</a></span>";
 
 				} else {
 					if ($is_lifer) {
