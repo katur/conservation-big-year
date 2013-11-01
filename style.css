@@ -1820,17 +1820,17 @@ span.float {
 	float: left;
 	clear: both;
 	padding-bottom: 40px;
+	width: 100%;
 }
 
 #primary-image {
 	float: left;
-	width: 500px;
+	max-width: 500px;
 	padding-right: 20px;
 }
 
 #scientific-classification {
 	float: left;
-	width: 440px;
 }
 
 #conservation-classification {
