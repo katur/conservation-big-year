@@ -115,11 +115,14 @@
 						echo ": LIFER!!";
 					}
 					echo "</span>";
-
-					while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
-						$date = date("M j, Y", strtotime($sightings_row["date"]));
-						$state = $sightings_row["state"];
-						echo "<span>$date in $state</span>";
+					if (mysql_fetch_assoc($sightings_result)) {
+						echo "<span>Also seen on:<ul>";
+						while ($sightings_row = mysql_fetch_assoc($sightings_result)) {
+							$date = date("M j, Y", strtotime($sightings_row["date"]));
+							$state = $sightings_row["state"];
+							echo "<li>$date in $state</li>";
+						}
+						echo "</ul></span>";
 					}
 
 
