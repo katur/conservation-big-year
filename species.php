@@ -13,7 +13,7 @@
 	$query = "SELECT id, common_name, scientific_name,
 		species_list.order, family, family_common, subfamily,
 		seen_this_year, seen_in_refuge, seen_only_in_refuge, is_lifer,
-		is_probably_extinct, in_conservation_list,
+		aba_countable, is_probably_extinct, in_conservation_list,
 		flickr_code,
 		abc_status_id, esa_status_id,
 		cornell_map, ebird_map, essay
@@ -42,6 +42,7 @@
 			$seen_in_refuge = $row["seen_in_refuge"];
 			$seen_only_in_refuge = $row["seen_only_in_refuge"];
 			$is_lifer = $row["is_lifer"];
+			$aba_countable = $row["aba_countable"];
 			$is_probably_extinct = $row["is_probably_extinct"];
 			$in_conservation_list = $row["in_conservation_list"];
 			$flickr_code = $row["flickr_code"];
@@ -99,6 +100,9 @@
 			<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
 			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
 			<span></span>
+			
+			<?php if (!$aba_countable) echo "<span>Not countable by ABA rules</span><span></span>"; ?>
+
 			<?php
 				$sightings_query = "SELECT date, state
 					FROM sighting

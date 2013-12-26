@@ -89,7 +89,7 @@
 
 		// start building query
 		$query = "
-			SELECT common_name, seen_this_year,
+			SELECT common_name, aba_countable, seen_this_year,
 			seen_in_refuge, seen_only_in_refuge,
 			is_lifer, url_common_name,
 			is_probably_extinct,
@@ -101,41 +101,46 @@
 		";
 
 		// if there is a filter term, add condition
-		if ($in_conservation_list)
+		if ($is_lifer && $seen)
+			$query = $query . " WHERE is_lifer = $is_lifer AND seen_this_year = 1";
+		else if ($seen_in_refuge)
+			$query = $query . " WHERE seen_in_refuge = 1";
+		else if ($seen_only_in_refuge)
+			$query = $query . " WHERE seen_only_in_refuge = 1";
+		else if ($all)
+			$query = $query . " WHERE species_list.id IS NOT NULL";
+		else if ($is_lifer)
+			$query = $query . " WHERE is_lifer = $is_lifer";
+		else if ($in_conservation_list)
 			$query = $query . " WHERE in_conservation_list = $in_conservation_list";
 		else if ($esa_status_id)
 			$query = $query . " WHERE esa_status_id = $esa_status_id";
 		else if ($abc_status_id)
 			$query = $query . " WHERE abc_status_id = $abc_status_id";
-		else if ($is_lifer && $seen)
-			$query = $query . " WHERE is_lifer = $is_lifer AND seen_this_year = 1";
-		else if ($is_lifer)
-			$query = $query . " WHERE is_lifer = $is_lifer";
-		else if ($all)
-			$query = $query;
-		else if ($seen_in_refuge)
-			$query = $query . " WHERE seen_in_refuge = 1";
-		else if ($seen_only_in_refuge)
-			$query = $query . " WHERE seen_only_in_refuge = 1";
 		else
 			$query = $query . " WHERE seen_this_year = 1";
-
-
-		// order by aou_list id
+		
+		// first count just those countable
+		$aba_query = $query . " AND aba_countable = 1 GROUP BY common_name";	
+		$aba_result = mysql_query($aba_query) or die(mysql_error());
+		
+		// now get full list, ordering by aou_list id
 		$query = $query . " GROUP BY common_name ORDER BY species_list.id";
-
-		$result = mysql_query($query) or die(mysql_error());
+		$result = mysql_query($query) or die(mysql_error());	
 	?>
 
 	<div id="species-list">
 		<h2 class='species-subtitle'>
-			<?php echo mysql_numrows($result); ?>
-			species
+			<?php 
+				echo mysql_numrows($result) . " species ";
+				echo "(" . mysql_numrows($aba_result) . " ABA countable)";
+			?>
 		</h2>
 
 		<?php
 			while ($row = mysql_fetch_assoc($result)) {
 				$common_name = $row["common_name"];
+				$aba_countable = $row["aba_countable"];
 				$seen_this_year = $row["seen_this_year"];
 				$seen_in_refuge = $row["seen_in_refuge"];
 				$seen_only_in_refuge = $row["seen_only_in_refuge"];
