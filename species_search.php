@@ -158,6 +158,9 @@
 				else if ($seen_in_refuge)
 					echo "* ";
 
+				if (!$aba_countable)
+					echo "&#8224; ";
+
 				echo "<a href='/species/?common_name=$url_common_name'>$common_name";
 
 				if ($is_probably_extinct)
@@ -183,6 +186,7 @@
 	<div id="refuge-asterisks">
 		<span>* Seen within the <a href="http://www.fws.gov/refuges/" target="_blank">National Wildlife Refuge System</a></span>
 		<span>** Seen only within the <a href="http://www.fws.gov/refuges/" target="_blank">National Wildlife Refuge System</a></span>
+		<span>&#8224; Not countable by ABA rules</span>
 	</div>
 </div>
 <?php get_footer(); ?>
