@@ -176,10 +176,10 @@
 			echo "<h2 class='species-subtitle'>Maps</h2><div id='species-maps' class='species-section'>";
 
 			if ($cornell_map)
-				echo "<a href='$cornell_map' target='_blank'>Cornell's Range Map</a>";
+				echo "<span><a href='$cornell_map' target='_blank'>Cornell's Range Map</a></span>";
 
 			if ($ebird_map)
-				echo "<a href='$ebird_map' target='_blank'>eBird Dynamic Map</a>";
+				echo "<span><a href='$ebird_map' target='_blank'>eBird Dynamic Map</a></span>";
 
 			echo "</div>";
 		}

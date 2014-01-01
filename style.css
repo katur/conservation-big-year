@@ -1839,6 +1839,7 @@ span.float {
 
 #scientific-classification span,
 #conservation-classification span,
+#species-maps span,
 #species-links a,
 #species-essay,
 #link-list a {
@@ -1861,11 +1862,6 @@ span.float {
 
 #species-maps {
 	float: left;
-}
-
-#species-maps a {
-	float: left;
-	padding-right: 20px;
 }
 
 #species-essay {
