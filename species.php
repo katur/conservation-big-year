@@ -16,7 +16,7 @@
 		aba_countable, is_probably_extinct, in_conservation_list,
 		flickr_code,
 		abc_status_id, esa_status_id,
-		cornell_map, ebird_map, essay
+		cornell_map, ebird_map, essay, sighting_info
 		FROM species_list
 		WHERE url_common_name = '$url_common_name'
 	;";
@@ -51,6 +51,7 @@
 			$cornell_map = $row["cornell_map"];
 			$ebird_map = $row["ebird_map"];
 			$essay = $row["essay"];
+			$sighting_info = $row["sighting_info"];
 		}
 	}
 
@@ -223,6 +224,14 @@
 
 	<!-- writing -->
 	<?php
+		if ($sighting_info) {
+			echo "<div class='species-section'>
+					<h2 class='species-subtitle'>2013 Sighting Information</h2>
+					<div id='species-essay'>$sighting_info</div>
+				</div>
+			";
+		}
+
 		if ($essay) {
 			echo "<div class='species-section'>
 					<h2 class='species-subtitle'>Conservation Concerns</h2>

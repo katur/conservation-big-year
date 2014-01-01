@@ -10,7 +10,7 @@
 
 	$query = "SELECT
 		seen_in_refuge, seen_only_in_refuge,
-		common_name, flickr_code, essay, ebird_map, cornell_map
+		common_name, flickr_code, essay, sighting_info, ebird_map, cornell_map
 		FROM species_list
 		WHERE url_common_name = '$url_common_name'
 	";
@@ -29,6 +29,7 @@
 		$common_name = $row["common_name"];
 		$flickr_code = $row["flickr_code"];
 		$essay = $row["essay"];
+		$sighting_info = $row["sighting_info"];
 		$cornell_map = $row["cornell_map"];
 		$ebird_map = $row["ebird_map"];
 
@@ -47,10 +48,13 @@
 
 					<h3>Flickr Code for main photo (\"medium\")</h3>
 					<textarea name='flickr_code' rows='5' cols='110'>$flickr_code</textarea>
+					
+					<h3>2013 Sighting Info</h3>
+					<textarea name='sighting_info' rows='12' cols='110'>$sighting_info</textarea>
 
 					<h3>Essay</h3>
 					<textarea name='essay' rows='12' cols='110'>$essay</textarea>
-
+					
 					<h3>Cornell Range Map</h3>
 					<input name='cornell_map' type='text' size='144' value='$cornell_map'>
 

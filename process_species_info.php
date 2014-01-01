@@ -15,6 +15,7 @@
 	$cornell_map = $_POST['cornell_map'];
 	$ebird_map = $_POST['ebird_map'];
 	$essay = $_POST['essay'];
+	$sighting_info = $_POST['sighting_info'];
 	if ($flickr_code) {
 		$src = preg_replace("/.+src=\"(.+?)\".+/", "$1", stripcslashes($flickr_code));
 		$width = preg_replace("/.+width=\"(.+?)\".+/", "$1", stripcslashes($flickr_code));
@@ -22,6 +23,7 @@
 		$query = "UPDATE species_list
 			SET flickr_code='$flickr_code', flickr_src='$src',
 			flickr_width='$width', flickr_height='$height', essay='$essay',
+			sighting_info='$sighting_info',
 			ebird_map='$ebird_map', cornell_map='$cornell_map',
 			seen_in_refuge='$seen_in_refuge', seen_only_in_refuge='$seen_only_in_refuge'
 			WHERE url_common_name='$url_common_name'
@@ -30,6 +32,7 @@
 		$query = "UPDATE species_list
 			SET flickr_code=NULL, flickr_src=NULL,
 			flickr_width=NULL, flickr_height=NULL, essay='$essay',
+			sighting_info='$sighting_info',
 			ebird_map='$ebird_map', cornell_map='$cornell_map',
 			seen_in_refuge='$seen_in_refuge', seen_only_in_refuge='$seen_only_in_refuge'
 			WHERE url_common_name='$url_common_name'
