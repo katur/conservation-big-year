@@ -1,5 +1,6 @@
-Conservation Big Year Website
+Conservation Big Year website
 =============================
+Blog and bird species pages for a birder's conservation-themed Big Year.
 
 Modified Wordpress 2012 theme.
 
