@@ -1,4 +1,4 @@
-Conservation Big Year website
+Conservation Big Year Website
 =============================
 Blog and bird species pages for a birder's conservation-themed Big Year.
 
