@@ -91,13 +91,13 @@
 				$link_id = $row["id"];
 				$link = $row["link"];
 				$link_name = $row["link_name"];
-				echo '
+				echo "
 					<li>
-						<a target="_blank" href="$link">
+						<a target='_blank' href=\"$link\">
 							$link_name
 						</a> (id: $link_id)
 					</li>
-				';
+				";
 			}
 
 			echo "

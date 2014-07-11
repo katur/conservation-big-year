@@ -101,7 +101,7 @@
 			<?php if ($subfamily) echo "<span>Subfamily: $subfamily</span>"; ?>
 			<span>Scientific Name: <i><?php echo $scientific_name; ?></i></span>
 			<span></span>
-			
+
 			<?php if (!$aba_countable) echo "<span>Not countable by ABA rules</span><span></span>"; ?>
 
 			<?php
@@ -198,7 +198,7 @@
 			while ($links_row = mysql_fetch_assoc($links_result)) {
 				$link = $links_row["link"];
 				$link_name = $links_row["link_name"];
-				echo "<a target='_blank' href='$link'>$link_name</a>";
+				echo "<a target='_blank' href=\"$link\">$link_name</a>";
 			}
 			echo "</div>";
 		}
